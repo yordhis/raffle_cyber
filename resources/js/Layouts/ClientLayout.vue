@@ -7,6 +7,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import Footer from '@/Components/Home/Footer.vue';
 
 defineProps({
     title: String,
@@ -36,9 +37,9 @@ const logout = () => {
 
         <Banner />
 
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-stone-950">
 
-        <nav class="bg-blue-700 border-b border-gray-100">
+        <nav class="bg-orange-600 shadow-lg fixed w-full">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -49,45 +50,19 @@ const logout = () => {
                                     <ApplicationMark class="block h-9 w-auto" />
                                 </Link>
                             </div>
-
-                            <!-- Navigation Links -->
-                            <!-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
-                            </div> -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href="#organizadores" 
-                                    class="text-white"
-                                >
-                                    Organizadores
+                        
+                            <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('compras.participar')"
+                                class="invisible sm:visible text-white text-xl">
+                                    Rifa Activa
                                 </NavLink>
                             </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href="#concursos"
-                                class="text-white"
-                                >
-                                    Concursos realizados
-                                </NavLink>
-                            </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href="#sorteos_activos"
-                                class="text-white"
-                                >
-                                    Sorteos activo
-                                </NavLink>
-                            </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href="#contactanos"
-                                class="text-white"
-                                >
-                                    Contactanos
-                                </NavLink>
-                            </div>
+                    
+                         
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
-
+                            <!-- version escritorio  -->
                             <templete v-if="$page.props.auth.user">
                                 <div class="ms-3 relative">
                                     <!-- Teams Dropdown -->
@@ -197,6 +172,28 @@ const logout = () => {
                                 </div>
 
                             </templete>
+
+                            <!--  Version teléfonica -->
+                            <template v-else>
+                                <Dropdown align="right" width="48">
+
+                                    <template #content>
+                                                <!-- Account Management -->
+                                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                                    Manage Account
+                                                </div>
+        
+                                                <DropdownLink :href="route('page.index')">
+                                                    Profile
+                                                </DropdownLink>
+        
+                                        
+        
+                                                <div class="border-t border-gray-200" />
+        
+                                    </template>
+                                </Dropdown>
+                            </template>
                         </div>
 
                         <!-- Hamburger -->
@@ -235,7 +232,7 @@ const logout = () => {
          
 
         <!-- Page Heading -->
-        <header v-if="$slots.header" class="bg-white shadow">
+        <header v-if="$slots.header" class="shadow pt-10">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <slot name="header" />
             </div>
@@ -245,5 +242,7 @@ const logout = () => {
         <main>
             <slot />
         </main>
+
+        
     </div>
 </div></template>

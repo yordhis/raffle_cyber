@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\PageController;
 use Illuminate\Foundation\Application;
@@ -27,7 +28,11 @@ Route::get('/', [PageController::class, 'index'])->name('page.index');
 //         'phpVersion' => PHP_VERSION,
 //     ]);
 // });
+Route::get('participar', [ComprasController::class, 'getFormParticipar'])->name('compras.participar');
+Route::get('pagar', [ComprasController::class, 'getFormPago'])->name('compras.pagar');
+Route::get('finalizado', [ComprasController::class, 'getFinalizado'])->name('compras.finalizado');
 Route::resource('compras', ComprasController::class)->names('compras');
+Route::resource('clientes', ClienteController::class)->names('clientes');
 
 Route::middleware([
     'auth:sanctum',

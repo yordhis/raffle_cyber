@@ -1,8 +1,30 @@
+<script setup>
+    import { computed, useSlots} from 'vue';
+    import { useForm } from '@inertiajs/inertia-vue3';
+    // import { useForm } from '@inertiajs/vue3'
+
+
+    defineProps({
+        clases: String
+    });
+
+    
+
+const form = useForm({
+    name: String,
+    card_id: String,
+    email: String,
+    phone: String,
+})
+
+
+</script>
+
 
 <template>
   
 
-    <form  @submit.prevent="$emit('submitted')" >
+    <form  @submit.prevent="form.post('clientes.store')" >
         <!--Sign in section-->
         <div class="flex flex-col items-center justify-center lg:justify-start ">
             <p class="mb-2 text-2xl">
@@ -20,7 +42,9 @@
                 type="button"
                 class="inline-block rounded bg-indigo-500 p-2 text-white"
                 data-te-ripple-init
-                data-te-ripple-color="light">
+                data-te-ripple-color="light"
+               
+                >
                 <slot  name="accionar" />
                 </button>
     
@@ -34,19 +58,6 @@
 
 </template>
 
-<script setup>
-    import { computed, useSlots } from 'vue';
 
-    defineProps({
-        clases: String
-    });
-
-    defineEmits(['submitted']);
-
-    const hasActions = computed(() => !! useSlots().actions);
-
-
-
-</script>
 
 <style></style>
