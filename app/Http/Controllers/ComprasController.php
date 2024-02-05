@@ -6,6 +6,7 @@ use App\Models\Compras;
 use App\Http\Requests\StoreComprasRequest;
 use App\Http\Requests\UpdateComprasRequest;
 use App\Models\Cliente;
+use App\Models\Helper;
 use App\Models\MethodPayment;
 use App\Models\Raffle;
 use Illuminate\Http\Request;
@@ -50,18 +51,56 @@ class ComprasController extends Controller
      */
     public function store(Request $request)
     {
+       
         $compraValidada = $request->validate([
-            'order_code' => 'required | unique:compras', 
-            'client_id' => 'required | numeric', 
+            // Data Cliente
+            'name' => 'required | max:255',
+            'card_id' => 'required | numeric',
+            'phone' => 'required | max:50',
+            'email' => 'required | email',
+            
+            // Data Pago
+            // 'order_code' => 'required | unique:compras', 
+            // 'client_id' => 'required | numeric', 
             'raffle_id' => 'required | numeric', 
             'tasa' => 'required | numeric', 
             'total' => 'required | numeric', 
+            'amount' => 'required | numeric', 
             'payment_date' => 'required | date',
             'payment_method_id' => 'required | numeric', 
+            'file' => 'required', 
             'reference_number' => 'required | numeric',  
         ]);
+      
+        $compraValidada['file'] = Helper::setFile($request, 'captures');
 
-        Compras::create($compraValidada);
+        // Crear cliente
+        $cliente = Cliente::firstOrCreate(
+            [
+                "card_id" => $compraValidada['card_id'],
+            ],
+            [
+                "name" => $compraValidada['name'],
+                "card_id" => $compraValidada['card_id'],
+                "phone" => $compraValidada['phone'],
+                "email" => $compraValidada['email']
+            ]
+        );
+
+        if($cliente){
+            $compra = Compras::create([
+                'order_code' => Helper::getCodigo('compras', 'order_code'), 
+                'client_id' => $cliente->id, 
+                'raffle_id' => $compraValidada['raffle_id'], 
+                'tasa' => $compraValidada['tasa'],
+                'total' => floatval($compraValidada['total']), 
+                'amount' => intval($compraValidada['amount']), 
+                'payment_date' => $compraValidada['payment_date'],
+                'payment_method_id' => $compraValidada['payment_method_id'],
+                'file' => $compraValidada['file'], 
+                'reference_number' => $compraValidada['reference_number'], 
+            ]);
+        }
 
         // $datosDeCompra = [
         //     "client" => Cliente::find($compraValidada['client_id']),
@@ -71,7 +110,7 @@ class ComprasController extends Controller
         // ];
 
 
-        Inertia::render('LandingPage/Finalizado');
+        return Inertia::render('LandingPage/Finalizado');
 
     }
 

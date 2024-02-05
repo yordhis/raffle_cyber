@@ -49,7 +49,7 @@ const form = useForm({
 
                 <div class="bg-white  rounded-2xl p-4 mx-10">
                     <form @submit.prevent="form.post('/clientes')">
-                        <!-- Nombre -->
+                            <!-- Nombre -->
                             <InputLabel class="text-xl">Nombre Completo</InputLabel>
                             <input class="rounded-2xl my-2 w-full" type="text" v-model="form.name">
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.name">{{ form.errors.name }}</div>
@@ -61,12 +61,12 @@ const form = useForm({
                             <InputLabel class="text-xl">Teléfono movil</InputLabel>
                             <input class="rounded-2xl my-2 w-full" type="text" v-model="form.phone">
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.phone">{{ form.errors.phone }}</div>
-                           
+                            <!-- Correo -->
                             <InputLabel class="text-xl">E-mail</InputLabel>
                             <input class="rounded-2xl my-2 w-full" type="text" v-model="form.email">
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.email">{{ form.errors.email }}</div>
+                            
                             <!-- submit -->
-                        
                             <button class="w-full text-center ease-in duration-300 bg-green-500 hover:bg-orange-700 shadow-lg  shadow-green-500/50 rounded-lg p-2 my-2 text-white text-2xl text-center">
                                 Guardar mis datos
                             </button>

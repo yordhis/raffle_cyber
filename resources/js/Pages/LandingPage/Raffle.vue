@@ -28,7 +28,7 @@ import { Link } from '@inertiajs/vue3';
 
                 <article class="mt-2 sm:mt-20  p-10  text-white bg-stone-900 rounded-3xl md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12 ">
                     <span class="box-decoration-slice bg-gradient-to-r from-neutral-600 to-pink-500 text-white px-2 text-3xl">
-                        ¡Gran Rifa!
+                        ¡Gran Sorteo!
                     </span><br>
                     <span class="box-decoration-slice bg-gradient-to-r from-orange-600 to-pink-500 text-white px-2 text-6xl">
                         De Ferrari IT
@@ -37,12 +37,12 @@ import { Link } from '@inertiajs/vue3';
                         <h3 class="">Fecha del sorteo: <span class="text-green-500"> 14-02-2024 </span></h3>
                         <p><span class="text-orange-400">Premios:</span> 1er lugar se lleva el carro</p>
                         <p><span class="text-orange-400">Transmisión en vivo por:</span> Loteria del tachira canal 12 </p>
-                        <p><span class="text-orange-400">Costo por voleto:</span> 2$</p>
+                        <p><span class="text-orange-400">Costo por boleto:</span> 2$</p>
                    
                         <button class="text-center ease-in duration-300 mt-3 bg-green-500 hover:bg-orange-700 shadow-lg  shadow-green-500/50 rounded-lg p-2  text-white text-2xl text-center">
-                            <Link :href="route('clientes.create')" 
+                            <Link :href="route('compras.pagar')" 
                                     class=" ">
-                                    ¡COMPRAR VOLETO AHORA!
+                                    ¡COMPRAR BOLETO AHORA!
                             </Link>
                         </button>
                     </div>
