@@ -3,6 +3,9 @@ import ClientLayout from '@/Layouts/ClientLayout.vue';
 import { useForm } from '@inertiajs/vue3';
 import InputLabel from '@/Components/InputLabel.vue';
 import { getMonitor } from "consulta-dolar-venezuela";
+import { ArrowDownIcon, ArrowLongUpIcon, ArrowUpIcon, PlusIcon, MinusIcon } from '@heroicons/vue/20/solid';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+
 
 const metodosDePagos = [
     {
@@ -39,7 +42,7 @@ const form = useForm({
     total: 0,
     tasa: 0,
     payment_date: "",
-    payment_method_id: null,
+    payment_method_id: 0,
     file: null,
     reference_number: null,
     // esto no se va almacenar
@@ -81,6 +84,21 @@ const abrirModalDeMetodoDePagos = (idMetodo) => {
                 : form.modalInfoMetodoPago = false;
 };
 
+const hanledCantidadEdit = (accion) =>{
+    switch (accion) {
+        case "+":
+            form.amount++;
+            break;
+        case "-":
+            form.amount--;
+            break;
+        default:
+            form.amount = 2
+            break;
+    }
+    hanledCantidad(form);
+};
+
 </script>
 
 <template>
@@ -99,7 +117,7 @@ const abrirModalDeMetodoDePagos = (idMetodo) => {
                 <div class="flex justify-center flex-wrap">
                     <div class="bg-white  rounded-2xl p-4 mx-10 my-5">
                         <form @submit.prevent="form.post('/compras')">
-                            <!-- Rifa -->
+                            <!-- Sorteo -->
                             <InputLabel class="text-xl">Premio</InputLabel>
                             <input class="rounded-2xl my-2 w-full bg-orange-500  text-center text-2xl" readonly type="text"
                                 v-model="form.rifa">
@@ -108,29 +126,44 @@ const abrirModalDeMetodoDePagos = (idMetodo) => {
 
                             <!-- Nombre -->
                             <InputLabel class="text-xl">Nombre Completo</InputLabel>
-                            <input class="rounded-2xl my-2 w-full" type="text" v-model="form.name">
+                            <input class="rounded-2xl my-2 w-full" type="text" v-model="form.name"
+                            placeholder="Ingrese nombre completo">
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.name">{{ form.errors.name }}</div>
                             <!-- Cedula -->
                             <InputLabel class="text-xl">Rif o número de identificación</InputLabel>
-                            <input class="rounded-2xl my-2 w-full" type="text" v-model="form.card_id">
+                            <input class="rounded-2xl my-2 w-full" type="text" v-model="form.card_id"
+                            placeholder="Ingrese número de identificación">
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.card_id">{{ form.errors.card_id }}</div>
                             <!-- Teléfono-->
                             <InputLabel class="text-xl">Teléfono movil</InputLabel>
-                            <input class="rounded-2xl my-2 w-full" type="text" v-model="form.phone">
+                            <input class="rounded-2xl my-2 w-full" type="text" v-model="form.phone"
+                            placeholder="Ingrese número contacto">
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.phone">{{ form.errors.phone }}</div>
                             <!-- Correo -->
                             <InputLabel class="text-xl">E-mail</InputLabel>
-                            <input class="rounded-2xl my-2 w-full" type="text" v-model="form.email">
+                            <input class="rounded-2xl my-2 w-full" type="text" v-model="form.email"
+                            placeholder="Ingrese correo electrónico">
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.email">{{ form.errors.email }}</div>
 
                             <!-- Cantidad de ticket -->
-                            <div class="sm:flex sm:justify-between">
+                            <div class="sm:flex sm:justify-between ">
                                 <div class=" py-2 pr-2">
                                     <InputLabel class="text-xl">Cantidad de voletos</InputLabel>
-                                    <input class="w-full rounded-2xl my-2  text-center text-1xl" type="number"
+                                    <input class="w-full rounded-2xl sm:my-2  text-center text-1xl" type="number"
                                         @input="hanledCantidad(form)" v-model="form.amount">
                                      <div class="p-0 m-0 text-red-500" v-if="form.errors.amount">{{ form.errors.amount }}</div>
                                 </div>
+                                <div class="xs:flex xs:justify-between sm:invisible ">
+                                    <PrimaryButton type="button" class=" mx-10 sm:h-5" 
+                                    @click="hanledCantidadEdit('+')">
+                                        <PlusIcon style="width: 18px;"></PlusIcon>
+                                    </PrimaryButton>
+                                    <PrimaryButton type="button" class=" mx-10 sm:h-5" 
+                                    @click="hanledCantidadEdit('-')" >
+                                        <MinusIcon style="width: 18px;"></MinusIcon>
+                                    </PrimaryButton>
+                                </div>
+
                                 <div class="py-2">
                                     <InputLabel class="text-xl">Monto a cancelar en BS</InputLabel>
                                     <input class="w-full rounded-2xl my-2  text-center " readonly type="number"
@@ -153,10 +186,12 @@ const abrirModalDeMetodoDePagos = (idMetodo) => {
                             <InputLabel class="text-xl">Método de pago</InputLabel>
                             <select class="rounded-2xl my-2 w-full" id="select_metodo_pago"
                                 v-model="form.payment_method_id"
+                                
                                 @change="abrirModalDeMetodoDePagos(form.payment_method_id)">
-                                <!-- <option  value="">SELECCIONE METODO DE PAGO</option> -->
-                                <option v-for="item in metodosDePagos" :key="item.id" :value="item.id" selected>{{ item.name
-                                }}</option>
+                                <option disabled value="0" >SELECCIONE MÉTODO DE PAGO</option>
+                                <option v-for="item in metodosDePagos" :key="item.id" :value="item.id" >
+                                    {{ item.name }} 
+                                </option>
 
                             </select>
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.payment_method_id">{{ form.errors.payment_method_id }}</div>
@@ -180,7 +215,8 @@ const abrirModalDeMetodoDePagos = (idMetodo) => {
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.file">{{ form.errors.file }}</div>
                             
                             <InputLabel class="text-xl">Número de referencia del pago</InputLabel>
-                            <input class="rounded-2xl my-2 w-full" type="number" v-model="form.reference_number">
+                            <input class="rounded-2xl my-2 w-full" type="number" v-model="form.reference_number"
+                            placeholder="Ingrese número de referencia">
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.reference_number">{{ form.errors.reference_number }}</div>
 
                                 <progress v-if="form.progress" :value="form.progress.percentage" max="100">
