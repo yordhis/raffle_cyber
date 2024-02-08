@@ -128,7 +128,7 @@ const abrirModalDeMetodoDePagos = (idMetodo) => {
                                 <div class=" py-2 pr-2">
                                     <InputLabel class="text-xl">Cantidad de voletos</InputLabel>
                                     <input class="w-full rounded-2xl my-2  text-center text-1xl" type="number"
-                                        @click="hanledCantidad(form)" v-model="form.amount">
+                                        @input="hanledCantidad(form)" v-model="form.amount">
                                      <div class="p-0 m-0 text-red-500" v-if="form.errors.amount">{{ form.errors.amount }}</div>
                                 </div>
                                 <div class="py-2">
@@ -199,7 +199,8 @@ const abrirModalDeMetodoDePagos = (idMetodo) => {
 
                     </div>
 
-                    <div v-if="form.modalInfoMetodoPago" class="p-4 m-1 xs:p-0 rounded fixed ">
+                    <!-- Modal de información de método de pago -->
+                    <div v-if="form.modalInfoMetodoPago" class="p-4 m-5 xs:p-0 rounded fixed top-10">
 
                         <div class=" p-6 max-w-sm mx-auto bg-gray-950 rounded-xl shadow-lg flex items-center space-x-0">
                             <div class="p-2">
