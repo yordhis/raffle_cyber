@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Raffle;
 use App\Http\Requests\StoreRaffleRequest;
 use App\Http\Requests\UpdateRaffleRequest;
+use App\Models\Helper;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Inertia\Inertia;
 
 class RaffleController extends Controller
 {
@@ -13,7 +17,10 @@ class RaffleController extends Controller
      */
     public function index()
     {
-        //
+        $raffles = Raffle::all();
+        return Inertia::render('Admin/Sorteo/Index', [
+            "raffles" => $raffles
+        ]);
     }
 
     /**
@@ -21,15 +28,44 @@ class RaffleController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Sorteo/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRaffleRequest $request)
+    public function store(Request $request)
     {
-        //
+            $sorteoValidado = $request->validate([
+                "title" => "required | max:255",
+                "description" => "required",
+                "cost" => "required | numeric",
+                "start_date" => "required | date",
+                "end_date" => "required | date",
+                "limit_number" => "required | numeric",
+                "minimum_purchese" => "required | numeric",
+                "file" => "required"
+            ]);
+
+            $sorteoValidado['file'] = Helper::setFile($request, 'sorteos');
+            
+            $resultado = Raffle::create($sorteoValidado);
+            if( $resultado ):
+                $mensaje = "El sorteo se creo correctamente y esta activo."; 
+                $responseHttp = Response::HTTP_CREATED;
+            else:
+                $mensaje = "El sorteo NO se creo, vuelve a intentar."; 
+                $responseHttp = Response::HTTP_FOUND;
+            endif;
+            
+            $respuesta = [
+                "mensaje" => $mensaje,
+                "estatus" => $responseHttp,
+            ];
+
+            return Inertia::render('Admin/Sorteo/Index', ["respuesta"=>$respuesta]);
+            
+       
     }
 
     /**
@@ -59,8 +95,11 @@ class RaffleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Raffle $raffle)
+    public function destroy(Raffle $raffle, $id)
     {
-        //
+        
+        Raffle::where('id', $id)->delete();
+
+        to_route('sorteos.index');
     }
 }

@@ -40,7 +40,7 @@ import { Link } from '@inertiajs/vue3';
                         <p><span class="text-orange-400">Costo por boleto:</span> 2$</p>
                    
                         <button class="text-center ease-in duration-300 mt-3 bg-green-500 hover:bg-orange-700 shadow-lg  shadow-green-500/50 rounded-lg p-2  text-white text-2xl text-center">
-                            <Link :href="route('compras.pagar')" 
+                            <Link :href="route('compras.comprar')" 
                                     class=" ">
                                     ¡COMPRAR BOLETO AHORA!
                             </Link>
@@ -54,7 +54,7 @@ import { Link } from '@inertiajs/vue3';
      
     </section>
 
-        <div class="w-full px-10 mt-20 dark:bg-neutral-600">            
+        <div class="w-full px-10 mt-20">            
             <label for="progreso" class="text-white py-5"> ¡Total de voletos vendidos! </label>
                 <div class="w-100 border rounded-2xl p-1 my-2">
                     <div class="bg-orange-500 rounded-2xl text-center" style="width: 100%;">100%</div>

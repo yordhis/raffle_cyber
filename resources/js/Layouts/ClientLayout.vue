@@ -52,9 +52,9 @@ const logout = () => {
                             </div>
                         
                             <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('compras.participar')"
+                                <NavLink :href="route('compras.index')"
                                 class="invisible sm:visible text-white text-xl">
-                                    Rifa Activa
+                                    Sorteo Activo
                                 </NavLink>
                             </div>
                     

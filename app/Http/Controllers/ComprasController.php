@@ -19,13 +19,7 @@ class ComprasController extends Controller
      */
     public function index()
     {
-        return Inertia::render('LandingPage/RegistrarCliente');
-    }
-    
-    public function getFormParticipar()
-    {
         return Inertia::render('LandingPage/Raffle');
-        
     }
 
     public function getFormPago()
@@ -33,9 +27,21 @@ class ComprasController extends Controller
         return Inertia::render('LandingPage/Pago');
     }
 
-    public function getFinalizado()
+    public function getFinalizado($idCompra)
     {
-        return Inertia::render('LandingPage/Finalizado');
+
+        $compra = Compras::find($idCompra);
+        $datosDeCompra = [
+            "client" => Cliente::find($compra['client_id']),
+            "sorteo" => Raffle::find($compra['raffle_id']),
+            // "payment_method" => MethodPayment::find($compraValidada['payment_method_id']),
+            "data" => $compra
+        ];
+
+
+        return Inertia::render('LandingPage/Finalizado',[
+            "compra" => $datosDeCompra
+        ]);
     }
 
     /**
@@ -105,12 +111,14 @@ class ComprasController extends Controller
         // $datosDeCompra = [
         //     "client" => Cliente::find($compraValidada['client_id']),
         //     "raffle" => Raffle::find($compraValidada['raffle_id']),
-        //     "payment_method" => MethodPayment::find($compraValidada['payment_method_id']),
-        //     "data" => $compraValidada
+        //     // "payment_method" => MethodPayment::find($compraValidada['payment_method_id']),
+        //     "data" => $compra
         // ];
 
-
-        return Inertia::render('LandingPage/Finalizado');
+        return to_route('compras.finalizada', $compra->id);
+        // return Inertia::render('LandingPage/Finalizado', [
+        //     "compra"=>$datosDeCompra
+        // ]);
 
     }
 

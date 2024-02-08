@@ -1,6 +1,6 @@
 <script setup>
 import ClientLayout from '@/Layouts/ClientLayout.vue';
-import { useForm } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3';
 import InputLabel from '@/Components/InputLabel.vue';
 import { getMonitor } from "consulta-dolar-venezuela";
 
@@ -51,16 +51,22 @@ const form = useForm({
 
 
 
-
 const getTasa = async (elemento) => {
     await getMonitor("BCV", "lastUpdate").then(res => {
+        console.log(res);
         elemento.monitor_tasa = res.bcv
-        elemento.tasa = res.bcv.price
-        elemento.total = parseFloat(res.bcv.price) * elemento.amount;
+        localStorage.setItem('tasa', res.bcv.price);
+    }).catch(err => { console.log(err)
+        getTasa(elemento);
     });
+
+    elemento.tasa == 0  ? elemento.tasa = parseFloat(localStorage.getItem('tasa'))
+                        : elemento.tasa;
+
+    elemento.total = parseFloat(elemento.tasa) * elemento.amount;
 }
 // Configuramo la tasa y el total
-getTasa(form)
+getTasa(form);
 
 const hanledCantidad = (elemento) => {
     if(elemento.amount < 2) return elemento.amount = 2;
@@ -70,11 +76,9 @@ const hanledCantidad = (elemento) => {
 // const hanledBtn = () => form.btnDisabled = true;
 
 const cerrarModalInfoMetodoPago = () => form.modalInfoMetodoPago = false;
-const abrirModalDeMetodoDePagos = () => {
-    console.log(form.payment_method_id);
-    console.log(form.modalInfoMetodoPago);
-    form.modalInfoMetodoPago = true
-    console.log(form.modalInfoMetodoPago);
+const abrirModalDeMetodoDePagos = (idMetodo) => {
+        idMetodo? form.modalInfoMetodoPago = true
+                : form.modalInfoMetodoPago = false;
 };
 
 </script>
@@ -156,11 +160,21 @@ const abrirModalDeMetodoDePagos = () => {
 
                             </select>
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.payment_method_id">{{ form.errors.payment_method_id }}</div>
-                            
+                            <button v-if="!form.modalInfoMetodoPago" 
+                                type="button"
+                                @click="abrirModalDeMetodoDePagos(form.payment_method_id)"
+                                class="w-full text-center ease-in duration-300 bg-gray-950 hover:bg-orange-700 shadow-lg  shadow-green-500/50 rounded-lg p-2 my-2 text-white text-sm text-center">
+                                Ver datos de pago
+                            </button>
                             
                             
                             <InputLabel class="text-xl">Agrega capture o vauche de pago</InputLabel>
-                            <input class="rounded-2xl my-2 p-4 w-full" accept="image/*"  type="file"
+                            <input class="rounded-2xl my-2 p-4 w-full block w-full text-sm text-slate-500
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-full file:border-0
+                                        file:text-sm file:font-semibold
+                                        file:bg-green-50 file:text-black-700
+                                        hover:file:bg-orange-100" accept="image/*"  type="file"
                             @input="form.file = $event.target.files[0]" 
                             >
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.file">{{ form.errors.file }}</div>
@@ -254,4 +268,5 @@ const abrirModalDeMetodoDePagos = () => {
 
 
 
-</ClientLayout></template>
+</ClientLayout>
+</template>

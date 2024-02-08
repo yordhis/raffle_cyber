@@ -182,5 +182,11 @@ return [
         'title'                 => 'título',
         'username'              => 'usuario',
         'year'                  => 'año',
+        'start_date'            => 'Fecha de inicio',
+        'end_date'              => 'Fecha de finalización',
+        'limit_number'          => 'Límite de números',
+        'minimum_purchese'      => 'Mínimo de compra',
+        'cost'                  => 'Costo',
+        'file'                  => 'Archivo',
     ],
 ];

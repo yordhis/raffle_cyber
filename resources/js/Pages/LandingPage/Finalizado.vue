@@ -1,20 +1,13 @@
 <script setup>
 import ClientLayout from '@/Layouts/ClientLayout.vue';
 import Footer from '@/Components/Home/Footer.vue';
-import CustomFormSection from "@/Components/ComponentForm/CustomFormSection.vue";
-import CustomInput from "@/Components/ComponentForm/CustomInput.vue";
 import BarraDePasos from '@/Components/Partials/BarraDePasos.vue';
-import { useForm } from '@inertiajs/vue3'
-import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SectionTitle from '@/Components/SectionTitle.vue';
 
-const form = useForm({
-  name: null, 
-  card_id: null,
-  phone: null,
-  email: null,
-})
+defineProps({
+  compra: {type: Object}
+});
 
 
 
@@ -26,13 +19,29 @@ const form = useForm({
     
         <template #header>
 
-            <h1 class="mt-10 text-4xl text-white">Gracias por participar en la rifa</h1>
+            <SectionTitle>
+              <template #title >
+                <h1 class="mt-10 text-4xl text-white">¡Ya casi estas participando! </h1>
+                <span class="box-decoration-slice bg-gradient-to-r from-orange-600 to-pink-500 text-white px-2 text-4xl">
+                        {{ compra.client.name.toUpperCase()}}
+                </span>
+              </template>
+              <template #description>
+                <p class="text-orange-400 text-2xl">
+                  Verificaremos tu pago y al corfirmar tu pago te enviaremos tus 
+                  ¡BOLETOS GANADORES! al correo sumistrado o whatsapp.
+                 
+
+
+                </p>
+              </template>
+            </SectionTitle>
 
         </template>
 
         <div class=" flex justify-center">
             <div></div>
-            <img class=" object-cover" width="500" src="/assets/images/level-up.jpg" alt="Modern building architecture">
+            <img class=" hover:animate-spin" width="400" src="/assets/images/level-up.jpg" alt="Modern building architecture">
         </div>
  
 

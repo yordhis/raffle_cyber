@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('method_payments', function (Blueprint $table) {
             $table->id();
+            $table->string('method_name');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

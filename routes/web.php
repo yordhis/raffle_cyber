@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RaffleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,8 +19,6 @@ use Inertia\Inertia;
 |
 */
 
-
-Route::get('/', [PageController::class, 'index'])->name('page.index');
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
 //         'canLogin' => Route::has('login'),
@@ -28,19 +27,21 @@ Route::get('/', [PageController::class, 'index'])->name('page.index');
 //         'phpVersion' => PHP_VERSION,
 //     ]);
 // });
-Route::get('participar', [ComprasController::class, 'getFormParticipar'])->name('compras.participar');
-Route::get('pagar', [ComprasController::class, 'getFormPago'])->name('compras.pagar');
-Route::get('finalizado', [ComprasController::class, 'getFinalizado'])->name('compras.finalizado');
-Route::resource('compras', ComprasController::class)->names('compras');
-Route::resource('clientes', ClienteController::class)->names('clientes');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+Route::get('/', [PageController::class, 'index'])->name('page.index');
+Route::get('/comprar', [ComprasController::class, 'getFormPago'])->name('compras.comprar');
+Route::get('/finalizado/{idCompra}', [ComprasController::class, 'getFinalizado'])->name('compras.finalizada');
+Route::resource('/compras', ComprasController::class)->names('compras');
+
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::resource('/sorteos', RaffleController::class)->names('sorteos');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+require __DIR__.'/auth.php';

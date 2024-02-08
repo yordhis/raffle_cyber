@@ -34,7 +34,7 @@ const logout = () => {
         <Banner />
 
         <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+            <nav class="bg-orange-600 shadow-lg border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -48,8 +48,30 @@ const logout = () => {
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')"
+                                class="text-white">
+                                    Panel
+                                </NavLink>
+                            </div>
+                            <!-- Navigation Links Raffles-->
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('sorteos.index')" :active="route().current('sorteos.index')"
+                                class="text-white">
+                                    Sorteos
+                                </NavLink>
+                            </div>
+                            <!-- Navigation Links Clients-->
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')"
+                                class="text-white">
+                                    Clientes
+                                </NavLink>
+                            </div>
+                            <!-- Navigation Links Payments-->
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')"
+                                class="text-white">
+                                    Pagos
                                 </NavLink>
                             </div>
                         </div>
@@ -79,7 +101,7 @@ const logout = () => {
 
                                             <!-- Team Settings -->
                                             <DropdownLink :href="route('teams.show', $page.props.auth.user.current_team)">
-                                                Team Settings
+                                                __(Team Settings)
                                             </DropdownLink>
 
                                             <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.create')">
@@ -139,7 +161,7 @@ const logout = () => {
                                         </div>
 
                                         <DropdownLink :href="route('profile.show')">
-                                            Profile
+                                            Perfil
                                         </DropdownLink>
 
                                         <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
@@ -281,7 +303,7 @@ const logout = () => {
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="sm:container sm:mx-auto ">
                 <slot />
             </main>
         </div>

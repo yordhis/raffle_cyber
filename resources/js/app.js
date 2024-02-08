@@ -7,8 +7,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 
 
-
-const appName = "Jarviierdu" || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -20,6 +19,6 @@ createInertiaApp({
             .mount(el);
     },
     progress: {
-        color: '#000'
+        color: '#4B5563',
     },
 });

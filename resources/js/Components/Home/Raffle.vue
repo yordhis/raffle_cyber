@@ -77,7 +77,7 @@ let colorText = "text-white"
                         </div>
                         
                         <button class="text-center ease-in duration-300">
-                            <Link :href="route('compras.participar')" 
+                            <Link :href="route('compras.index')" 
                                     class="bg-green-500 hover:bg-orange-700 shadow-lg  shadow-green-500/50 rounded-lg p-2  text-white text-2xl text-center ">
                                     ¡PARTICIPA AHORA!
                             </Link>
