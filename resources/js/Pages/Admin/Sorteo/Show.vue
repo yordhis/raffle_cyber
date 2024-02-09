@@ -19,22 +19,6 @@ const form =  useForm({
     id: ''
 })
 
-const hanledDelete = (id, name) =>{
-        const alerta = Swal.mixin({
-            buttonsStyling:true
-        });
-        alerta.fire({
-            title:'Seguro que desea eliminar el sorteo de ' + name,
-            icon:'question', showCancelButton:true,
-            confirmButtonText:'si, Eliminar',
-            cancelButtonText:'Cancelar',
-        }).then((result)=>{
-            if(result.isConfirmed){
-                console.log(id);
-                form.delete(route('sorteos.destroy', id));
-            }
-        })
-}
 </script>
 
 <template>
@@ -44,7 +28,7 @@ const hanledDelete = (id, name) =>{
                 <div>
                   <SectionTitle>
                       <template #title><div class="text-4xl">
-                          Listas de sorteos creados
+                          Sorteo
                         </div></template>
                         <template #description>
                             En la siguiente lista puede visualizar, editar y eliminar los sorteos creados.
@@ -63,7 +47,7 @@ const hanledDelete = (id, name) =>{
             </div>
         </template>
 
-     
+       
     
     </AuthenticatedLayout>
 </template>
