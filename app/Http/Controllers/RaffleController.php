@@ -47,7 +47,7 @@ class RaffleController extends Controller
             ]);
 
             $sorteoValidado['file'] = Helper::setFile($request, 'sorteos');
-            return $sorteoValidado;
+            
             $resultado = Raffle::create($sorteoValidado);
             if( $resultado ):
                 $mensaje = "El sorteo se creo correctamente y esta activo."; 
