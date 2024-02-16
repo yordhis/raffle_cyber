@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\MethodPaymentController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RaffleController;
-use Illuminate\Foundation\Application;
+// use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -38,7 +41,15 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('/sorteos', RaffleController::class)->names('sorteos');
+    
+    Route::put('/raffles/{idRaffles}/updateStatus', [RaffleController::class, "updateStatus"])->name('raffles.updateStatus');
+    Route::put('/confirmed', [PaymentController::class, 'confirmed'])->name('pagos.confirmed');
+    Route::put('/decline', [PaymentController::class, 'decline'])->name('pagos.decline');
+
+    Route::resource('/method_payments', MethodPaymentController::class)->names('method_payments');
+    Route::resource('/pagos', PaymentController::class)->names('pagos');
+    Route::resource('/clientes', ClienteController::class)->names('clientes');
+    Route::resource('/raffles', RaffleController::class)->names('raffles');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

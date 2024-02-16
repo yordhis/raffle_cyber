@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use App\Http\Requests\StorePageRequest;
 use App\Http\Requests\UpdatePageRequest;
+use App\Models\Boleto;
+use App\Models\Raffle;
 use Inertia\Inertia;
 
 class PageController extends Controller
@@ -14,7 +16,13 @@ class PageController extends Controller
      */
     public function index()
     {
-        return Inertia::render('LandingPage/Home');
+         $raffles = Raffle::orderBy('end_date', 'desc')->get();
+        foreach ($raffles as $key => $raff) {
+           $raff['total_sold'] = Boleto::where("raffle_id", $raff->id)->count();
+        }
+        return Inertia::render('LandingPage/Home', [
+            "raffles" => $raffles
+        ]);
     }
 
     /**

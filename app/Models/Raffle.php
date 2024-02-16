@@ -14,7 +14,7 @@ class Raffle extends Model
         'description', // Descripcion
         'cost', // costo por ticket
         'start_date', // fecha de inicio
-        'end_date', // fecha de finalización
+        'end_date', // fecha de finalización DEL SORTEO
         'limit_number',  // limite de números
         'minimum_purchese',  // el minimo de compra
         'file',  // IMAGEN DEL PREMIO

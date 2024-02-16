@@ -35,22 +35,22 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('sorteos.index')" :active="route().current('sorteos.index')">
+                                <NavLink :href="route('raffles.index')" :active="route().current('raffles.index')">
                                     Sorteos
                                 </NavLink>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('sorteos.index')" :active="route().current('sorteos.index')">
+                                <NavLink :href="route('clientes.index')" :active="route().current('clientes.index')">
                                     Clientes
                                 </NavLink>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('sorteos.index')" :active="route().current('sorteos.index')">
+                                <NavLink :href="route('pagos.index')" :active="route().current('pagos.index')">
                                     Pagos
                                 </NavLink>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('sorteos.index')" :active="route().current('sorteos.index')">
+                                <NavLink :href="route('raffles.index')" :active="route().current('raffles.index')">
                                     Estadisticas
                                 </NavLink>
                             </div>
@@ -138,17 +138,17 @@ const showingNavigationDropdown = ref(false);
                         </ResponsiveNavLink>
                     </div>
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                        <ResponsiveNavLink :href="route('raffles.index')" :active="route().current('raffles.index')">
                             Sorteos
                         </ResponsiveNavLink>
                     </div>
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                        <ResponsiveNavLink :href="route('clientes.index')" :active="route().current('clientes.index')">
                             Clientes
                         </ResponsiveNavLink>
                     </div>
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                        <ResponsiveNavLink :href="route('pagos.index')" :active="route().current('pagos.index')">
                             Pagos
                         </ResponsiveNavLink>
                     </div>
@@ -159,18 +159,18 @@ const showingNavigationDropdown = ref(false);
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
+                    <div class="pt-4 pb-1 border-t border-gray-200 text-white">
                         <div class="px-4">
-                            <div class="font-medium text-base text-gray-800">
-                                {{ $page.props.auth.user.name }}
+                            <div class="font-medium text-base ">
+                                {{ $page.props.auth.user.name.toUpperCase() }}
                             </div>
-                            <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
+                            <div class="font-medium text-sm text-indigo-100">{{ $page.props.auth.user.email }}</div>
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
+                            <ResponsiveNavLink :href="route('profile.edit')" :active="route().current('profile.edit')"> Perfil </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
+                               Cerrar sesión
                             </ResponsiveNavLink>
                         </div>
                     </div>

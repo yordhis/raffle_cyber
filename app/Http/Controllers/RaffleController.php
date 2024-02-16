@@ -12,28 +12,26 @@ use Inertia\Inertia;
 
 class RaffleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+  
     public function index()
     {
-        $raffles = Raffle::all();
+        $raffles = Raffle::orderBy('start_date','asc')->get();
         return Inertia::render('Admin/Sorteo/Index', [
             "raffles" => $raffles
         ]);
     }
+    public function getRaffles()
+    {
+        $raffles = Raffle::orderBy('start_date','asc')->get();
+        return $raffles;
+    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return Inertia::render('Admin/Sorteo/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
             $sorteoValidado = $request->validate([
@@ -63,7 +61,7 @@ class RaffleController extends Controller
                 "estatus" => $responseHttp,
             ];
 
-            return Inertia::render('Admin/Sorteo/Index', ["respuesta"=>$respuesta]);
+            return to_route('raffles.index');
             
        
     }
@@ -81,25 +79,56 @@ class RaffleController extends Controller
      */
     public function edit(Raffle $raffle)
     {
-        //
+      
+        return Inertia::render('Admin/Sorteo/Edit', ['raffle' => $raffle]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRaffleRequest $request, Raffle $raffle)
+    public function update(Request $request, Raffle $raffle)
     {
-        //
+  
+        
+        $sorteoValidado = $request->validate([
+            "title" => "required | max:255",
+            "description" => "required",
+            "cost" => "required | numeric",
+            "start_date" => "required | date",
+            "end_date" => "required | date",
+            "limit_number" => "required | numeric",
+            "minimum_purchese" => "required | numeric",
+            "file" => ""
+        ]);
+        
+        if($request->file) {
+            return $sorteoValidado;
+            $sorteoValidado['file'] = Helper::setFile($request, 'sorteos');
+            Helper::removeFile($raffle->file);
+        }else{
+            $sorteoValidado['file'] = $raffle->file;
+        }
+        
+        $raffle->update($sorteoValidado);
+        
+        return to_route('raffles.index');
+
+    }
+
+    public function updateStatus( $id )
+    {
+        $resultado = Raffle::where('id', $id)->update([ "status" => !Raffle::find($id)->status]);
+        to_route('raffles.index');
+     
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Raffle $raffle, $id)
+    public function destroy(Raffle $raffle)
     {
-        
-        Raffle::where('id', $id)->delete();
-
-        to_route('sorteos.index');
+        Helper::removeFile($raffle->file);
+        $raffle->delete();
+        to_route('raffles.index');
     }
 }

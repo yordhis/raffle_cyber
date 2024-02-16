@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Compras;
-use App\Http\Requests\StoreComprasRequest;
-use App\Http\Requests\UpdateComprasRequest;
-use App\Models\Cliente;
-use App\Models\Helper;
-use App\Models\MethodPayment;
-use App\Models\Raffle;
+use App\Mail\GraciasMailable;
+use Illuminate\Support\Facades\Mail;
+use App\Models\{
+    Compras, 
+    Cliente,
+    Helper,
+    MethodPayment,
+    Raffle,
+};
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ComprasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return Inertia::render('LandingPage/Raffle');
@@ -38,23 +37,11 @@ class ComprasController extends Controller
             "data" => $compra
         ];
 
-
         return Inertia::render('LandingPage/Finalizado',[
             "compra" => $datosDeCompra
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
        
@@ -108,49 +95,13 @@ class ComprasController extends Controller
             ]);
         }
 
-        // $datosDeCompra = [
-        //     "client" => Cliente::find($compraValidada['client_id']),
-        //     "raffle" => Raffle::find($compraValidada['raffle_id']),
-        //     // "payment_method" => MethodPayment::find($compraValidada['payment_method_id']),
-        //     "data" => $compra
-        // ];
+        /** Enviar correo */
+        Mail::to($request->email)
+        ->send( new GraciasMailable);
 
+        /** Redireccionar a la vista finalizar */
         return to_route('compras.finalizada', $compra->id);
-        // return Inertia::render('LandingPage/Finalizado', [
-        //     "compra"=>$datosDeCompra
-        // ]);
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Compras $compras)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Compras $compras)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateComprasRequest $request, Compras $compras)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Compras $compras)
-    {
-        //
-    }
 }

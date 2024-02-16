@@ -40,8 +40,7 @@ import { Link } from '@inertiajs/vue3';
                         <p><span class="text-orange-400">Costo por boleto:</span> 2$</p>
                    
                         <button class="text-center ease-in duration-300 mt-3 bg-green-500 hover:bg-orange-700 shadow-lg  shadow-green-500/50 rounded-lg p-2  text-white text-2xl text-center">
-                            <Link :href="route('compras.comprar')" 
-                                    class=" ">
+                            <Link :href="route('compras.comprar')">
                                     ¡COMPRAR BOLETO AHORA!
                             </Link>
                         </button>

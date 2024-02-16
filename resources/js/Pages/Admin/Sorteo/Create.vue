@@ -35,7 +35,7 @@ const form = useForm({
                   </SectionTitle>
                 </div>
                 <div>
-                    <NavLink :href="route('sorteos.index')"
+                    <NavLink :href="route('raffles.index')"
                         class="text-orange-600"
                     >
                         <TableCellsIcon></TableCellsIcon>
@@ -48,7 +48,7 @@ const form = useForm({
 
         <div class=" flex justify-center flex-wrap">
             <div class="bg-white  rounded-2xl p-4 mx-10 my-5">
-                <form @submit.prevent="form.post('/sorteos')">
+                <form @submit.prevent="form.post(route('raffles.store'))">
                     <!-- Titulo -->
                     <InputLabel class="text-xl">Premio del premio</InputLabel>
                     <input class="rounded-2xl my-2 w-full" type="text"
@@ -119,7 +119,7 @@ const form = useForm({
 
              
 
-                    <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                    <progress v-if="form.progress" class="w-full" :value="form.progress.percentage" max="100">
                         {{ form.progress.percentage }}%
                     </progress>
 

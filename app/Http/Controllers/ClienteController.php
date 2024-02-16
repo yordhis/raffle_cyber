@@ -10,25 +10,20 @@ use Inertia\Inertia;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+  
     public function index()
     {
-        //
+        $clientes = Cliente::orderBy('id', 'desc')->paginate(5);
+        return Inertia::render('Admin/Clients/Index', [ 'clients' => $clientes ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+  
     public function create()
     {
         return Inertia::render('LandingPage/RegistrarCliente');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
      
@@ -39,44 +34,41 @@ class ClienteController extends Controller
             'email' => 'required | email'
         ]);
 
-     
-
-        Cliente::create($dataVadidate);
-
-        return to_route('compras.pagar');
+        $cliente = new Cliente($dataVadidate);
+        $cliente->save();
+        return to_route('clientes.index');
 
 
     }
 
-    /**
-     * Display the specified resource.
-     */
+  
     public function show(Cliente $cliente)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Cliente $cliente)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateClienteRequest $request, Cliente $cliente)
+    public function update(Request $request, Cliente $cliente)
     {
-        //
+
+        $dataVadidate = $request->validate([
+            'name' => 'required | max:255',
+            'card_id' => 'required | numeric',
+            'phone' => 'required | max:50',
+            'email' => 'required | email'
+        ]);
+
+        $cliente->update($request->input());
+        return to_route('clientes.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Cliente $cliente)
     {
-        //
+        $cliente->delete();
+        return to_route('clientes.index');
     }
 }

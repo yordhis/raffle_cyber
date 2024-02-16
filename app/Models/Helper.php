@@ -21,7 +21,7 @@ class Helper extends Model
     public static function setVector($totalVector, $format = "0000")
     {
         $vectorRaffle = [];
-        for ($i = 0; $i < $totalVector; $i++) {
+        for ($i = 0; $i <= $totalVector; $i++) {
             $ticket = strlen($i) == 1 ? "000" . $i
                 : substr($format, strlen($i),  strlen($i)) . $i;
             array_push($vectorRaffle,  $ticket);
@@ -63,12 +63,12 @@ class Helper extends Model
      */
     public static function setAssignTicket($amount, $vectorRaffle)
     {
-        print_r($vectorRaffle);
+        // print_r($vectorRaffle);
         $arrayTicketAssign = [];
         $numberAssign = 0;
         $amountAviableOfTicket = Helper::getTicketAviables($vectorRaffle);
 
-        if ($amount >= $amountAviableOfTicket) return "La cantidad solicitada de ticket sobrepasa la disponible. quedan disponibles {$amountAviableOfTicket}";
+        if ($amount >= $amountAviableOfTicket) return false; // Esto hace referencia a que se terminaron los tickets o que la cantidad solicitada sobrepasa la disponible
 
         do {
             for ($i = 0; $i < $amount - $numberAssign; $i++) {
@@ -77,11 +77,8 @@ class Helper extends Model
                     array_push($arrayTicketAssign, $vectorRaffle[$ticket]);
                     $vectorRaffle[$ticket] = "assign";
                     $numberAssign++;
-                } else echo "no asigno";
+                }
             }
-            echo  $numberAssign;
-            echo "--------";
-            echo $amount;
         } while ($numberAssign < $amount);
 
         return $arrayTicketAssign;

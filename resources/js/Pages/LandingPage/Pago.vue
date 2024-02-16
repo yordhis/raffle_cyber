@@ -219,7 +219,7 @@ const hanledCantidadEdit = (accion) =>{
                             placeholder="Ingrese número de referencia">
                             <div class="p-0 m-0 text-red-500" v-if="form.errors.reference_number">{{ form.errors.reference_number }}</div>
 
-                                <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                                <progress v-if="form.progress" :value="form.progress.percentage" class="w-full" max="100">
                                 {{ form.progress.percentage }}%
                                 </progress>
 
@@ -227,7 +227,7 @@ const hanledCantidadEdit = (accion) =>{
 
                             <button
                            
-                                class="w-full text-center ease-in duration-300 bg-green-500 hover:bg-orange-700 shadow-lg  shadow-green-500/50 rounded-lg p-2 my-2 text-white text-2xl text-center">
+                                class="w-full text-center ease-in duration-300 bg-green-500 hover:bg-orange-700 shadow-lg  shadow-green-500/50 rounded-lg p-2 my-2 text-white text-2xl">
                                 Registrar pago
                             </button>
 
