@@ -6,6 +6,10 @@ import { getMonitor } from "consulta-dolar-venezuela";
 import { ArrowDownIcon, ArrowLongUpIcon, ArrowUpIcon, PlusIcon, MinusIcon } from '@heroicons/vue/20/solid';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 
+const props = defineProps({
+    raffle: {type:Object},
+    methodPayments: {type:Object},
+});
 
 const metodosDePagos = [
     {
@@ -37,7 +41,7 @@ const form = useForm({
     phone: null,
     email: null,
     //data pago
-    raffle_id: 1,
+    raffle_id: props.raffle.id,
     amount: 2,
     total: 0,
     tasa: 0,
@@ -47,16 +51,13 @@ const form = useForm({
     reference_number: null,
     // esto no se va almacenar
     monitor_tasa: {},
-    rifa: "FERARRI",
+    sorteo: props.raffle.title,
     modalInfoMetodoPago: false,
     btnDisabled: false
-})
-
-
+});
 
 const getTasa = async (elemento) => {
     await getMonitor("BCV", "lastUpdate").then(res => {
-        console.log(res);
         elemento.monitor_tasa = res.bcv
         localStorage.setItem('tasa', res.bcv.price);
     }).catch(err => { console.log(err)
@@ -67,16 +68,15 @@ const getTasa = async (elemento) => {
                         : elemento.tasa;
 
     elemento.total = parseFloat(elemento.tasa) * elemento.amount;
-}
+};
 // Configuramo la tasa y el total
 getTasa(form);
 
+/** Validamos la cantidad */
 const hanledCantidad = (elemento) => {
     if(elemento.amount < 2) return elemento.amount = 2;
     else elemento.total = parseFloat(elemento.tasa) * elemento.amount;
-}
-
-// const hanledBtn = () => form.btnDisabled = true;
+};
 
 const cerrarModalInfoMetodoPago = () => form.modalInfoMetodoPago = false;
 const abrirModalDeMetodoDePagos = (idMetodo) => {
@@ -120,7 +120,7 @@ const hanledCantidadEdit = (accion) =>{
                             <!-- Sorteo -->
                             <InputLabel class="text-xl">Premio</InputLabel>
                             <input class="rounded-2xl my-2 w-full bg-orange-500  text-center text-2xl" readonly type="text"
-                                v-model="form.rifa">
+                                v-model="form.sorteo">
                             <input class="" readonly type="hidden" v-model="form.raffle_id">
                             <div v-if="form.errors.raffle_id">{{ form.errors.raffle_id }}</div> 
 
@@ -189,7 +189,7 @@ const hanledCantidadEdit = (accion) =>{
                                 
                                 @change="abrirModalDeMetodoDePagos(form.payment_method_id)">
                                 <option disabled value="0" >SELECCIONE MÉTODO DE PAGO</option>
-                                <option v-for="item in metodosDePagos" :key="item.id" :value="item.id" >
+                                <option v-for="item in methodPayments" :key="item.id" :value="item.id" >
                                     {{ item.name }} 
                                 </option>
 
@@ -228,7 +228,7 @@ const hanledCantidadEdit = (accion) =>{
                             <button
                            
                                 class="w-full text-center ease-in duration-300 bg-green-500 hover:bg-orange-700 shadow-lg  shadow-green-500/50 rounded-lg p-2 my-2 text-white text-2xl">
-                                Registrar pago
+                               NOTIFICAR PAGO
                             </button>
 
                         </form>
@@ -242,52 +242,59 @@ const hanledCantidadEdit = (accion) =>{
                             <div class="p-2">
                                 <div class="text-2xl font-medium text-white text-center">Datos del método:</div>
                                 <p class="text-slate-950 text-2xl text-center text-white "> 
-                                    {{ metodosDePagos[form.payment_method_id - 1].name }}
+                                    {{ methodPayments[form.payment_method_id - 1].name }}
                                 </p>
 
                                 <!-- TELEFONO -->
-                                <p class="text-slate-300 text-center"> {{ metodosDePagos[form.payment_method_id - 1].phone ?
+                                <p class="text-slate-300 text-center"> {{ methodPayments[form.payment_method_id - 1].phone ?
                                     "Teléfono" : "" }}</p>
                                 <p class="text-orange-500 text-2xl text-center">{{
-                                    metodosDePagos[form.payment_method_id - 1].phone ?
-                                    metodosDePagos[form.payment_method_id - 1].phone : "" }}</p>
+                                    methodPayments[form.payment_method_id - 1].phone ?
+                                    methodPayments[form.payment_method_id - 1].phone : "" }}</p>
                                 <!--CIERRE TELEFONO -->
 
 
-                                <p class="text-slate-300  text-center">{{ metodosDePagos[form.payment_method_id - 1].account ?
+                                <p class="text-slate-300  text-center">{{ methodPayments[form.payment_method_id - 1].account ?
                                     "Cuenta Bancaria" : "" }}</p>
                                 <p class="text-orange-500 text-2xl text-center">{{
-                                    metodosDePagos[form.payment_method_id - 1].account ?
-                                    metodosDePagos[form.payment_method_id - 1].account : "" }}</p>
+                                    methodPayments[form.payment_method_id - 1].account ?
+                                    methodPayments[form.payment_method_id - 1].account : "" }}</p>
 
 
                                 <p class="text-slate-300  text-center">{{
-                                    metodosDePagos[form.payment_method_id - 1].account_type ?
+                                    methodPayments[form.payment_method_id - 1].account_type ?
                                     "Tipo de cuenta" : "" }}</p>
                                 <p class="text-orange-500 text-2xl text-center">{{
-                                    metodosDePagos[form.payment_method_id - 1].account_type ?
-                                    metodosDePagos[form.payment_method_id - 1].account_type : "" }}</p>
+                                    methodPayments[form.payment_method_id - 1].account_type ?
+                                    methodPayments[form.payment_method_id - 1].account_type : "" }}</p>
 
 
-                                <p class="text-slate-300  text-center">{{ metodosDePagos[form.payment_method_id - 1].bank ?
+                                <p class="text-slate-300  text-center">{{ methodPayments[form.payment_method_id - 1].bank ?
                                     "Banco" : "" }}</p>
                                 <p class="text-orange-500 text-2xl text-center">{{
-                                    metodosDePagos[form.payment_method_id - 1].bank ?
-                                    metodosDePagos[form.payment_method_id - 1].bank : "" }}</p>
+                                    methodPayments[form.payment_method_id - 1].bank ?
+                                    methodPayments[form.payment_method_id - 1].bank : "" }}</p>
 
-                                <p class="text-slate-300 text-center">{{ metodosDePagos[form.payment_method_id - 1].bank_code
+                                <p class="text-slate-300 text-center">{{ methodPayments[form.payment_method_id - 1].bank_code
                                     ?
                                     "Código" : "" }}</p>
                                 <p class="text-orange-500 text-2xl text-center">{{
-                                    metodosDePagos[form.payment_method_id - 1].bank_code ?
-                                    metodosDePagos[form.payment_method_id - 1].bank_code : "" }}</p>
+                                    methodPayments[form.payment_method_id - 1].bank_code ?
+                                    methodPayments[form.payment_method_id - 1].bank_code : "" }}</p>
 
 
-                                <p class="text-slate-300 text-center">{{ metodosDePagos[form.payment_method_id - 1].card_id ?
+                                <p class="text-slate-300 text-center">{{ methodPayments[form.payment_method_id - 1].card_id ?
                                     "Documento de identidad" : "" }}</p>
                                 <p class="text-orange-500 text-2xl text-center">{{
-                                    metodosDePagos[form.payment_method_id - 1].card_id ?
-                                    metodosDePagos[form.payment_method_id - 1].card_id : "" }}</p>
+                                    methodPayments[form.payment_method_id - 1].card_id ?
+                                    methodPayments[form.payment_method_id - 1].card_id : "" }}</p>
+                                
+                                
+                                <p class="text-slate-300 text-center">{{ methodPayments[form.payment_method_id - 1].titular ?
+                                    "Titular" : "" }}</p>
+                                <p class="text-orange-500 text-2xl text-center">{{
+                                    methodPayments[form.payment_method_id - 1].titular ?
+                                    methodPayments[form.payment_method_id - 1].titular : "" }}</p>
 
                                 <p class="text-center text-white">
                                     <button class="bg-red-600 p-2 m-2 rounded-xl "

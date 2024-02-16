@@ -32,7 +32,7 @@ use Inertia\Inertia;
 // });
 
 Route::get('/', [PageController::class, 'index'])->name('page.index');
-Route::get('/comprar', [ComprasController::class, 'getFormPago'])->name('compras.comprar');
+Route::get('/comprar/{idRaffle}', [ComprasController::class, 'getFormPago'])->name('compras.comprar');
 Route::get('/finalizado/{idCompra}', [ComprasController::class, 'getFinalizado'])->name('compras.finalizada');
 Route::resource('/compras', ComprasController::class)->names('compras');
 
@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
     
     Route::put('/raffles/{idRaffles}/updateStatus', [RaffleController::class, "updateStatus"])->name('raffles.updateStatus');
     Route::put('/pagos/confirmed', [PaymentController::class, 'confirmed'])->name('pagos.confirmed');
-    Route::put('/decline', [PaymentController::class, 'decline'])->name('pagos.decline');
+    Route::put('/pagos/decline', [PaymentController::class, 'decline'])->name('pagos.decline');
 
     Route::resource('/method_payments', MethodPaymentController::class)->names('method_payments');
     Route::resource('/pagos', PaymentController::class)->names('pagos');

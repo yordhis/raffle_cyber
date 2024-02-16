@@ -15,7 +15,8 @@ class MethodPaymentSeeder extends Seeder
     {
         $metodosDePagos = [
             [
-                'method_name'=> "Pago Movil",
+                'name'=> "Pago Movil",
+                'titular'=> "Fulanito Perez",
                 'phone'=> "0414-3534569",
                 'account'=> null,
                 'account_type'=> null,
@@ -24,7 +25,8 @@ class MethodPaymentSeeder extends Seeder
                 'card_id'=> "24823972",
             ],
             [
-                'method_name'=> "Transferencia",
+                'name'=> "Transferencia",
+                'titular'=> "Fulanito Perez",
                 'phone'=> null,
                 'account'=> "01054578124512456352",
                 'account_type'=> "Corriente",

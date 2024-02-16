@@ -10,11 +10,11 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 const form = useForm({
     title: "", // titulo
     description: "", // Descripcion
-    cost: "", // costo por ticket
+    cost: 2, // costo por ticket
     start_date: "", // fecha de inicio
     end_date: "", // fecha de finalización
-    limit_number: "",  // limite de números
-    minimum_purchese: "",  // el minimo de compra
+    limit_number: "9999",  // limite de números
+    minimum_purchese: "2",  // el minimo de compra
     file: "",  // imagen del premio
     status: 1 // activo o inactivo el sorteo
 })

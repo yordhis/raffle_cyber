@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\GraciasMailable;
+use App\Mail\NotificarMailable;
 use Illuminate\Support\Facades\Mail;
 use App\Models\{
     Compras, 
@@ -21,9 +22,16 @@ class ComprasController extends Controller
         return Inertia::render('LandingPage/Raffle');
     }
 
-    public function getFormPago()
+    public function getFormPago($idRaffle)
     {
-        return Inertia::render('LandingPage/Pago');
+        $raffle = Raffle::find($idRaffle);
+        if(!$raffle) return to_route('page.index');
+
+        $methodPayments = MethodPayment::orderBy('created_at', 'desc')->get();
+        return Inertia::render('LandingPage/Pago', [
+            "raffle" => $raffle,
+            "methodPayments" => $methodPayments,
+        ]);
     }
 
     public function getFinalizado($idCompra)
@@ -93,14 +101,25 @@ class ComprasController extends Controller
                 'file' => $compraValidada['file'], 
                 'reference_number' => $compraValidada['reference_number'], 
             ]);
+
+            /** Enviar correo */
+            Mail::to($request->email)
+            ->send( new GraciasMailable);
+    
+            $data = [
+                "name" => $request->name,
+                "end_date" => Raffle::find($request->raffle_id)->end_date,
+                "title" => Raffle::find($request->raffle_id)->title,
+                "amount" => $request->amount,
+                "total" => $request->total
+            ];
+            Mail::to('adminitradorDeJaviierdu@gmail.com')
+            ->send( new NotificarMailable($data));
+    
+            /** Redireccionar a la vista finalizar */
+            return to_route('compras.finalizada', $compra->id);
         }
 
-        /** Enviar correo */
-        Mail::to($request->email)
-        ->send( new GraciasMailable);
-
-        /** Redireccionar a la vista finalizar */
-        return to_route('compras.finalizada', $compra->id);
 
     }
 

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('method_payments', function (Blueprint $table) {
             $table->id();
-            $table->string('method_name', 255);
+            $table->string('name', 255);
+            $table->string('titular', 255)->nullable();
             $table->string('phone', 55)->nullable();
             $table->string('account', 55)->nullable(); // numero de cuenta o correo zelle
             $table->string('account_type', 155)->nullable();
