@@ -43,7 +43,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     
     Route::put('/raffles/{idRaffles}/updateStatus', [RaffleController::class, "updateStatus"])->name('raffles.updateStatus');
-    Route::put('/confirmed', [PaymentController::class, 'confirmed'])->name('pagos.confirmed');
+    Route::put('/pagos/confirmed', [PaymentController::class, 'confirmed'])->name('pagos.confirmed');
     Route::put('/decline', [PaymentController::class, 'decline'])->name('pagos.decline');
 
     Route::resource('/method_payments', MethodPaymentController::class)->names('method_payments');
