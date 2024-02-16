@@ -56,7 +56,7 @@ const props = defineProps({
                 </div>
 
                 <div class="w-full ">            
-                    <label for="progreso" class="text-white py-5"> ¡Total de voletos vendidos! </label>
+                    <label for="progreso" class="text-white py-5"> ¡Total de boletos vendidos! </label>
                         <div class="w-100 border rounded-2xl p-1 my-2">
                             <div class="bg-orange-500 rounded-2xl text-center text-white" :style="'width:'+  raffle.total_sold*100/raffle.limit_number  + '%;'">{{  (raffle.total_sold*100/raffle.limit_number).toFixed(2) }}%</div>
                         </div>
