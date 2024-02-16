@@ -34,7 +34,7 @@ class RaffleController extends Controller
 
     public function store(Request $request)
     {
-        return $request;
+       
             $sorteoValidado = $request->validate([
                 "title" => "required | max:255",
                 "description" => "required",
@@ -47,7 +47,7 @@ class RaffleController extends Controller
             ]);
 
             $sorteoValidado['file'] = Helper::setFile($request, 'sorteos');
-            
+            return $sorteoValidado;
             $resultado = Raffle::create($sorteoValidado);
             if( $resultado ):
                 $mensaje = "El sorteo se creo correctamente y esta activo."; 
