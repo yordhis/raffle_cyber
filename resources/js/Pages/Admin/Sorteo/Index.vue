@@ -1,5 +1,5 @@
 <script setup>
-import NavLink from '@/Components/NavLink.vue';
+import NavLinkSub from '@/Components/NavLinkSub.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { TableCellsIcon, PlusCircleIcon, PencilSquareIcon, TrashIcon, TicketIcon, CheckIcon, EyeIcon, EyeDropperIcon } from '@heroicons/vue/20/solid';
 import SectionTitle from '@/Components/SectionTitle.vue';
@@ -95,10 +95,10 @@ const hanledDelete = (id, name) => {
                     </SectionTitle>
                 </div>
                 <div>
-                    <NavLink :href="route('raffles.create')" class="text-orange-600">
+                    <NavLinkSub :href="route('raffles.create')" >
                         <PlusCircleIcon></PlusCircleIcon>
                         Crear Sorteo
-                    </NavLink>
+                    </NavLinkSub>
                 </div>
             </div>
         </template>
@@ -146,13 +146,13 @@ const hanledDelete = (id, name) => {
             </div>
             <div class="flex flex-wrap">
                 <div class="mx-1">
-                    <NavLink :href="route('raffles.edit', sorteo.id)" >
+                    <NavLinkSub :href="route('raffles.edit', sorteo.id)" >
 
                         <WarningButton >
                             <PencilSquareIcon style="width: 20px;"></PencilSquareIcon>
                             Editar
                         </WarningButton>
-                    </NavLink>
+                    </NavLinkSub >
                 </div>
                 <div class="mt-1">
                     <DangerButton 

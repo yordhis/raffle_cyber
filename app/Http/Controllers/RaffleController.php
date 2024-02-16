@@ -34,6 +34,7 @@ class RaffleController extends Controller
 
     public function store(Request $request)
     {
+        return $request;
             $sorteoValidado = $request->validate([
                 "title" => "required | max:255",
                 "description" => "required",

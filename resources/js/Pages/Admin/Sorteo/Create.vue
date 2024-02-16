@@ -1,7 +1,7 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { useForm } from '@inertiajs/vue3';
-import NavLink from '@/Components/NavLink.vue';
+import NavLinkSub from '@/Components/NavLinkSub.vue';
 import { TableCellsIcon, PlusCircleIcon, PencilSquareIcon, TrashIcon, TicketIcon, CheckIcon } from '@heroicons/vue/20/solid';
 import SectionTitle from '@/Components/SectionTitle.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
@@ -34,13 +34,11 @@ const form = useForm({
                         </template>
                   </SectionTitle>
                 </div>
-                <div>
-                    <NavLink :href="route('raffles.index')"
-                        class="text-orange-600"
-                    >
+                <div >
+                    <NavLinkSub :href="route('raffles.index')" >
                         <TableCellsIcon></TableCellsIcon>
-                         Lista Sorteos 
-                    </NavLink>
+                        Lista Sorteos 
+                    </NavLinkSub>
                 </div>
                
             </div>

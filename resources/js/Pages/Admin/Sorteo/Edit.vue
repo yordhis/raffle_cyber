@@ -43,7 +43,7 @@ const submit = () =>{
                         </template>
                   </SectionTitle>
                 </div>
-                <div>
+                <div class="text-orange-500">
                     <NavLinkSub :href="route('raffles.index')"
                     >
                         <TableCellsIcon></TableCellsIcon>
