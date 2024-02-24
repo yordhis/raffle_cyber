@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateRaffleRequest;
 use App\Models\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class RaffleController extends Controller

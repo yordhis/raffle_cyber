@@ -101,16 +101,16 @@ class Helper extends Model
     /**
      * Esta funcion se encarga de guardar la imagen en el store en la direccion public/fotos
      * recibe los siguientes parametros
-     * @param request  Estes es el elemento global de las peticiones y se accede a su metodo file y atributo file
-     * @return url Retorna la direccion donde se almaceno la imagen
+     * @param \request  Estes es el elemento global de las peticiones y se accede a su metodo file y atributo file
+     * @return \url Retorna la direccion donde se almaceno la imagen
      */
     public static function setFile($request, $directory)
     {
         // Movemos la imagen a storage/app/public/fotos
-        $imagen = $request->file('file')->store("public/{$directory}");
+        $path = $request->file('file')->store("public/{$directory}");
 
         // configuramos la url de /public a /storage
-        $url = Storage::url($imagen);
+        $url = Storage::url($path);
 
         // Retorna la URL de la imagen
         return $url;
@@ -147,5 +147,6 @@ class Helper extends Model
             $numberTicket = mt_rand($range_a, $range_b);
             $codigo = Str::substr($format, Str::length($numberTicket), Str::length($numberTicket)) . $numberTicket;
         }
+        return $arrayTicket;
     }
 }
