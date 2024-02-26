@@ -16,7 +16,7 @@ class PageController extends Controller
      */
     public function index()
     {
-         $raffles = Raffle::orderBy('end_date', 'desc')->get();
+        $raffles = Raffle::orderBy('end_date', 'desc')->get();
         foreach ($raffles as $key => $raff) {
            $raff['total_sold'] = Boleto::where("raffle_id", $raff->id)->count();
         }

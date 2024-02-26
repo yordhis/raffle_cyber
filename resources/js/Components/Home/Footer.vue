@@ -20,7 +20,7 @@
 
 <template>
   
-    <div class="w-full p-4 text-center bg-orange-600 border border-gray-0  shadow sm:p-8 dark:bg-orange-600 dark:border-orange-900">
+    <div class="w-full  p-4 text-center bg-orange-600 border border-gray-0  shadow sm:p-8 dark:bg-orange-600 dark:border-orange-900">
         <h5 class="mb-2 text-3xl font-bold text-white dark:text-white">{{ title }}</h5>
         <p class="mb-5 text-base text-white sm:text-lg dark:text-white">{{ subTitle }}</p>
         <div class="flex justify-center space-x-2 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">

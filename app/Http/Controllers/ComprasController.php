@@ -6,6 +6,7 @@ use App\Mail\GraciasMailable;
 use App\Mail\NotificarMailable;
 use Illuminate\Support\Facades\Mail;
 use App\Models\{
+    Boleto,
     Compras, 
     Cliente,
     Helper,
@@ -44,6 +45,8 @@ class ComprasController extends Controller
             // "payment_method" => MethodPayment::find($compraValidada['payment_method_id']),
             "data" => $compra
         ];
+
+        $datosDeCompra["sorteo"]['total_sold'] = Boleto::where("raffle_id", $datosDeCompra["sorteo"]->id)->count();
 
         return Inertia::render('LandingPage/Finalizado',[
             "compra" => $datosDeCompra
