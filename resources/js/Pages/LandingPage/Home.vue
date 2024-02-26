@@ -9,6 +9,7 @@ import Slider from '@/Components/Home/Slider.vue';
 import PrimaryButton  from "@/Components/PrimaryButton.vue";
 import Footer from '@/Components/Home/Footer.vue';
 import { useForm } from '@inertiajs/vue3';
+import TreeButton from '@/Components/TreeButton.vue';
 
 const props = defineProps({
     raffles:{type:Object}
@@ -44,12 +45,12 @@ const getComprar = (idRaffle) =>{
             <AccordionVue :title="raffles[0].title">
                 {{ raffles[0].description }}
             </AccordionVue>
-            <PrimaryButton class="w-full flex flex-inline justify-center bg-orange-500 shadow-none"
+            <TreeButton
             @click="getComprar(raffles[0].id)"
             >
-                <ArrowPathIcon v-if="form.processing" class="w-10 animate-spin"/>
                 COMPRAR BOLETO
-            </PrimaryButton>
+                <ArrowPathIcon v-if="form.processing" class="w-10 animate-spin"/>
+            </TreeButton>
         
             <BarraDePorcentaje 
                 title="¡Total de boletos vendidos!"
