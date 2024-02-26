@@ -1,3 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.inputBox
+{
+    position: relative;
+    width: 100%;
+    padding: 0%;
+   
+}
+
+
+.inputBox input,
+.inputBox select
+{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(252, 236, 223, 0.664);
+    background: #070a0e;
+    border-radius: 5px;
+    outline: none;
+    color: aliceblue;
+    font-size: 1em;
+    transition: 0.5s;
+}
+
+.inputBox span
+{
+    position: absolute;
+    left: 5px;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.938);
+    text-transform: uppercase;
+    transition: 0.5s;
+}
+
+.inputBox input:valid ~ span,
+.inputBox input:read-only ~ span,
+.inputBox select:valid ~ span,
+.inputBox input:focus ~ span
+{
+    color: #f38302;
+    padding: 2.5px;
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.65em;
+    padding: 0 10px;
+    background: #070a0e;
+    border-left: 1px solid #f38830;
+    border-right: 1px solid #f38830;
+    letter-spacing: 0.2em;
+}
+
+.inputBox input:valid,
+.inputBox input:focus 
+{
+    border: 2px solid #f38830;
+}

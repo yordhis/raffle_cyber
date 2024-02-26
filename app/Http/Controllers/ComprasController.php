@@ -52,7 +52,6 @@ class ComprasController extends Controller
 
     public function store(Request $request)
     {
-       
         $compraValidada = $request->validate([
             // Data Cliente
             'name' => 'required | max:255',
@@ -67,13 +66,14 @@ class ComprasController extends Controller
             'tasa' => 'required | numeric', 
             'total' => 'required | numeric', 
             'amount' => 'required | numeric', 
-            'payment_date' => 'required | date',
-            'payment_method_id' => 'required | numeric', 
+            // 'payment_date' => 'required | date', automático
+            'payment_method_id' => 'required | numeric | min:1', 
             'file' => 'required', 
             'reference_number' => 'required | numeric',  
         ]);
       
         $compraValidada['file'] = Helper::setFile($request, 'captures');
+        $compraValidada['payment_date'] = date('d-m-Y h:i:sa');
 
         // Crear cliente
         $cliente = Cliente::firstOrCreate(
@@ -109,11 +109,12 @@ class ComprasController extends Controller
             $data = [
                 "name" => $request->name,
                 "end_date" => Raffle::find($request->raffle_id)->end_date,
+                "payment_date" => $compraValidada['payment_date'],
                 "title" => Raffle::find($request->raffle_id)->title,
                 "amount" => $request->amount,
                 "total" => $request->total
             ];
-            Mail::to('adminitradorDeJaviierdu@gmail.com')
+            Mail::to('javiierdu@gmail.com')
             ->send( new NotificarMailable($data));
     
             /** Redireccionar a la vista finalizar */

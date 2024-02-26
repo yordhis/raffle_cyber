@@ -35,7 +35,7 @@
         button{
             border:0;
             border-radius: 5%;
-            background-color: chartreuse;
+            background-color: rgba(230, 153, 12, 0.801);
             padding: 15px;
         }
        
@@ -80,6 +80,11 @@
                 <tr>
                     <td> 
                         Total cancelado: {{ number_format($data['total'], 2 , ',', '.') }} Bs
+                    </td>
+                </tr>
+                <tr>
+                    <td> 
+                        Fecha de pago: {{ $data['payment_date'] }} 
                     </td>
                 </tr>
                 
