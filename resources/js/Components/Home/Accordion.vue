@@ -18,7 +18,7 @@ const props = defineProps({
         >
             <div class="flex cursor-pointer items-center justify-between"
             @click="show = !show">
-                <span> {{  title }} </span>
+                <span class="font-mono font-bold text-2xl text-orange-300 animate-wiggle animate-thrice animate-duration-[2000ms] animate-ease-in-out animate-normal"> 🥳 {{  title }} 🥳</span>
                 <img
                     src="https://upload.wikimedia.org/wikipedia/commons/9/96/Chevron-icon-drop-down-menu-WHITE.png"
                     :class="show ? 'h-2 w-3 transition-all duration-500 group-focus:-rotate-180' 

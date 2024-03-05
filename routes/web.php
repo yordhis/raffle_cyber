@@ -31,10 +31,12 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::get('/', [PageController::class, 'index'])->name('page.index');
-Route::get('/comprar/{idRaffle}', [ComprasController::class, 'getFormPago'])->name('compras.comprar');
-Route::get('/finalizado/{idCompra}', [ComprasController::class, 'getFinalizado'])->name('compras.finalizada');
-Route::resource('/compras', ComprasController::class)->names('compras');
+    //Rutas a las que se permitirá acceso
+    Route::get('/', [PageController::class, 'index'])->name('page.index');
+    Route::get('/comprar/{idRaffle}', [ComprasController::class, 'getFormPago'])->name('compras.comprar');
+    Route::get('/finalizado/{idCompra}', [ComprasController::class, 'getFinalizado'])->name('compras.finalizada');
+    Route::resource('/compras', ComprasController::class)->names('compras');
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

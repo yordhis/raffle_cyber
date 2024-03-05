@@ -30,31 +30,36 @@ const form = useForm({
     // esto no se va almacenar
     monitor_tasa: {},
     sorteo: props.raffle.title,
+    costo: props.raffle.cost,
     modalInfoMetodoPago: false,
     btnDisabled: false
 });
 
-const getTasa = async (elemento) => {
-    await getMonitor("BCV", "lastUpdate").then(res => {
-        elemento.monitor_tasa = res.bcv
+const getTasa = async (form) => {
+    await getMonitor("BCV", "lastUpdate")
+    .then(res => {
+        form.monitor_tasa = res.bcv;
+        form.tasa = res.bcv.price;
         localStorage.setItem('tasa', res.bcv.price);
+        form.total = (parseFloat(res.bcv.price) * form.costo * form.amount).toFixed(2);
+
     }).catch(err => {
         console.log(err)
-        getTasa(elemento);
+        getTasa(form);
+        form.tasa == 0 ? form.tasa = parseFloat(localStorage.getItem('tasa'))
+            : form.tasa;
+    
+        form.total = parseFloat(form.tasa) * form.costo *  form.amount;
     });
 
-    elemento.tasa == 0 ? elemento.tasa = parseFloat(localStorage.getItem('tasa'))
-        : elemento.tasa;
-
-    elemento.total = parseFloat(elemento.tasa) * elemento.amount;
 };
 // Configuramo la tasa y el total
 getTasa(form);
 
 /** Validamos la cantidad */
-const hanledCantidad = (elemento) => {
-    if (elemento.amount < 2) return elemento.amount = 2;
-    else elemento.total = (parseFloat(elemento.tasa) * elemento.amount).toFixed(2);
+const hanledCantidad = (form) => {
+    if (form.amount < 2) return form.amount = 2;
+    else form.total = ( form.tasa * form.costo * form.amount).toFixed(2);
 };
 
 const cerrarModalInfoMetodoPago = () => form.modalInfoMetodoPago = false;
@@ -159,9 +164,9 @@ const hanledCantidadEdit = (accion) => {
                             </div>
 
                             <div class="flex justify-between text-white mt-4">
-                                <div class="border border-orange-300 p-2">Tasa {{ form.monitor_tasa.title }}: {{ form.tasa
+                                <div class="border border-orange-300 p-2">Tasa {{ form.monitor_tasa.title }}: {{ form.monitor_tasa.price
                                 }} Bs</div>
-                                <div class="border border-orange-300 p-2">Costo por voleto: 2$</div>
+                                <div class="border border-orange-300 p-2">Costo por voleto: {{ form.costo }}$</div>
                             </div>
 
                             <!-- Método de pago -->
@@ -180,7 +185,7 @@ const hanledCantidadEdit = (accion) => {
 
                             <button v-if="!form.modalInfoMetodoPago && form.payment_method_id != 0" type="button"
                                 @click="abrirModalDeMetodoDePagos(form.payment_method_id)"
-                                class="w-full text-center ease-in duration-300 bg-gray-950 hover:bg-orange-700 shadow-lg  shadow-orange-500/50 rounded-lg p-2 my-2 text-white text-sm text-center">
+                                class="w-full ease-in duration-300 bg-gray-950 hover:bg-orange-700 shadow-lg  shadow-orange-500/50 rounded-lg p-2 my-2 text-white text-sm text-center">
                                 Ver datos de pago
                             </button>
 

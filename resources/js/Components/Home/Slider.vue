@@ -39,8 +39,8 @@ import { ref } from 'vue';
 </script>
 
 <template>
-    <div class="">
-        <div class="relative mx-auto max-w-2xl overflow-hidden rounded-md bg-gray-100">
+    <section class="mt-20 object-cover object-center block">
+        <div class="relative mx-auto max-w-2xl overflow-hidden rounded-md bg-gray-100 sm:w-80">
             <div v-if="activeCounter" class="absolute right-5 top-5 z-10 rounded-full px-2 text-center text-sm text-white">
                 <span v-text="currentIndex"></span>/<span v-text="images.length"></span>
             </div>
@@ -54,21 +54,19 @@ import { ref } from 'vue';
                 <!-- <i class="fas fa-chevron-right text-2xl font-bold text-gray-500"></i> -->
             </button>
     
-            <div class="relative bg-center" >
+         
                 <template v-for="(image, index) in images">
                     <div v-show="currentIndex == index + 1" >
-                        <img :src="image" alt="image" class="  rounded-sm w-full sm:h-80" id="caja-image"/>
+                        <img :src="image" alt="image" class="object-cover object-center block animate-fade-right animate-once animate-ease-in animate-normal rounded-sm w-full" id="caja-image"/>
                     </div>
-
                 </template>
-            </div>
+          
         </div>
-    </div>
+    </section>
 </template>
 
 <style>
   #caja-image{
-    height: 600px;
-    width: 100%;
+    height: 450px;
   }
 </style>

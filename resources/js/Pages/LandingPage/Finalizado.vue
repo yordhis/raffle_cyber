@@ -17,26 +17,34 @@ const form = useForm({
 // CONFETI
     let triangle = confetti.shapeFromPath({ path: 'M0 10 L5 0 L10 10z' });
     let scalar = 2; 
-    let pineapple = confetti.shapeFromText({ text: '🏍️', scalar });
+    let EmojiOne = confetti.shapeFromText({ text: '🥳', scalar });
+    let EmojiTwo = confetti.shapeFromText({ text: '🎉', scalar });
 
     function startConfetti(long) {
-        let counter = 0;
-        do {
-            counter= counter + long
+    
             confetti({
-                shapes: [triangle],
                 particleCount:100,
-                angle: counter,
+                angle: 90,
                 startVelocity:45
             });
             confetti({
-                shapes: [pineapple],
+                particleCount:100,
+                angle: 150,
+                startVelocity:45
+            });
+
+            confetti({
+                shapes: [EmojiOne],
                 scalar,
                 angle: counter,
             });
-            
-        } while (counter <= 360);
-    }; startConfetti(45);
+            confetti({
+                shapes: [EmojiTwo],
+                scalar,
+                angle: counter,
+            });
+  
+    }; startConfetti();
 
     function getConfeti(long){
       startConfetti(long)
