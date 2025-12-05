@@ -1,1 +1,0 @@
-import{_ as t}from"./_plugin-vue_export-helper-x3n3nnut.js";import{o as r,e as o,r as s}from"./app-4sLs5K50.js";const n={},a={class:"text-center ease-in duration-300 bg-verde-500 hover:bg-verde-700 shadow-lg shadow-verde-500/50 rounded-lg p-2 my-2 text-white text-2xl"};function c(e,d){return r(),o("button",a,[s(e.$slots,"default")])}const i=t(n,[["render",c]]);export{i as P};
