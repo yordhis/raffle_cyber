@@ -29,7 +29,7 @@ class GraciasMailable extends Mailable
     {
         return new Envelope(
             // usar la constante
-            from: new Address(env('MAIL_FROM_ADDRESS'), 'Ventas'), 
+            from: new Address(config('mail.from.address'), 'Ventas'), 
             subject: '¡Gracias por su compra!',
         );
     }

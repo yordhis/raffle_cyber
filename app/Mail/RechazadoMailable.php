@@ -26,7 +26,7 @@ class RechazadoMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(env('MAIL_FROM_ADDRESS'), 'Ventas'), 
+            from: new Address(config('mail.from.address'), 'Ventas'), 
             subject: 'Pago Rechazado',
         );
     }
