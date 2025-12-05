@@ -27,8 +27,8 @@ class NotificarMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('venta@javiierdu.com', 'Javiierdu.com'), 
-            subject: 'Notificación de venta Javiierdu.com',
+            from: new Address(env('MAIL_FROM_ADDRESS'), "Ventas"), 
+            subject: 'Notificación de venta',
         );
     }
 

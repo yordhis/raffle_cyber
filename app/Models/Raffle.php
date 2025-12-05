@@ -12,7 +12,7 @@ class Raffle extends Model
     protected $fillable =[
         'title', // titulo
         'description', // Descripcion
-        's', // costo por ticket
+        'cost', // costo por ticket
         'start_date', // fecha de inicio
         'end_date', // fecha de finalización DEL SORTEO
         'limit_number',  // limite de números

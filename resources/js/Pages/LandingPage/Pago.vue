@@ -95,9 +95,9 @@ const hanledCantidadEdit = (accion) => {
                 <div class="flex justify-center flex-wrap">
                     <div class="rounded-2xl p-1 mx-5 my-5">
                         <form @submit.prevent="form.post('/compras')" novalidate>
-                            <h1 class="text-4xl text-center text-orange-400">Comprar Boleto</h1>
+                            <h1 class="text-4xl text-center text-verde-400">Comprar Boleto</h1>
                             <!-- Sorteo -->
-                            <p class="p-2 my-2 text-indigo-100 text-center border-dashed border-2 border-orange-400">
+                            <p class="p-2 my-2 text-indigo-100 text-center border-dashed border-2 border-verde-400">
                                 {{ form.sorteo }}
                             </p>
 
@@ -164,9 +164,9 @@ const hanledCantidadEdit = (accion) => {
                             </div>
 
                             <div class="flex justify-between text-white mt-4">
-                                <div class="border border-orange-300 p-2">Tasa {{ form.monitor_tasa.title }}: {{ form.monitor_tasa.price
+                                <div class="border border-verde-300 p-2">Tasa {{ form.monitor_tasa.title }}: {{ form.monitor_tasa.price
                                 }} Bs</div>
-                                <div class="border border-orange-300 p-2">Costo por voleto: {{ form.costo }}$</div>
+                                <div class="border border-verde-300 p-2">Costo por voleto: {{ form.costo }}$</div>
                             </div>
 
                             <!-- Método de pago -->
@@ -185,7 +185,7 @@ const hanledCantidadEdit = (accion) => {
 
                             <button v-if="!form.modalInfoMetodoPago && form.payment_method_id != 0" type="button"
                                 @click="abrirModalDeMetodoDePagos(form.payment_method_id)"
-                                class="w-full ease-in duration-300 bg-gray-950 hover:bg-orange-700 shadow-lg  shadow-orange-500/50 rounded-lg p-2 my-2 text-white text-sm text-center">
+                                    class="w-full ease-in duration-300 bg-gray-950 hover:bg-verde-700 shadow-lg  shadow-verde-500/50 rounded-lg p-2 my-2 text-white text-sm text-center">
                                 Ver datos de pago
                             </button>
 
@@ -212,7 +212,7 @@ const hanledCantidadEdit = (accion) => {
                             <!-- submit -->
 
                             <button
-                                class="mt-4 w-full text-center ease-in duration-300 bg-orange-500 hover:bg-neutral-900 shadow-lg  shadow-neutral-500/50 rounded-lg p-2 my-2 text-neutral-900 text-2xl">
+                                class="mt-4 w-full text-center ease-in duration-300 bg-verde-500 hover:bg-neutral-900 shadow-lg  shadow-neutral-500/50 rounded-lg p-2 my-2 text-neutral-900 text-2xl">
                                 NOTIFICAR PAGO
                             </button>
 
@@ -233,7 +233,7 @@ const hanledCantidadEdit = (accion) => {
                                 <!-- TELEFONO -->
                                 <p class="text-slate-300 text-center"> {{ methodPayments[form.payment_method_id - 1].phone ?
                                     "Teléfono" : "" }}</p>
-                                <p class="text-orange-500 text-2xl text-center">{{
+                                <p class="text-verde-500 text-2xl text-center">{{
                                     methodPayments[form.payment_method_id - 1].phone ?
                                     methodPayments[form.payment_method_id - 1].phone : "" }}</p>
                                 <!--CIERRE TELEFONO -->
@@ -242,7 +242,7 @@ const hanledCantidadEdit = (accion) => {
                                 <p class="text-slate-300  text-center">{{ methodPayments[form.payment_method_id - 1].account
                                     ?
                                     "Cuenta Bancaria" : "" }}</p>
-                                <p class="text-orange-500 text-2xl text-center">{{
+                                    <p class="text-verde-500 text-2xl text-center">{{
                                     methodPayments[form.payment_method_id - 1].account ?
                                     methodPayments[form.payment_method_id - 1].account : "" }}</p>
 
@@ -250,14 +250,14 @@ const hanledCantidadEdit = (accion) => {
                                 <p class="text-slate-300  text-center">{{
                                     methodPayments[form.payment_method_id - 1].account_type ?
                                     "Tipo de cuenta" : "" }}</p>
-                                <p class="text-orange-500 text-2xl text-center">{{
+                                <p class="text-verde-500 text-2xl text-center">{{
                                     methodPayments[form.payment_method_id - 1].account_type ?
                                     methodPayments[form.payment_method_id - 1].account_type : "" }}</p>
 
 
                                 <p class="text-slate-300  text-center">{{ methodPayments[form.payment_method_id - 1].bank ?
                                     "Banco" : "" }}</p>
-                                <p class="text-orange-500 text-2xl text-center">{{
+                                <p class="text-verde-500 text-2xl text-center">{{
                                     methodPayments[form.payment_method_id - 1].bank ?
                                     methodPayments[form.payment_method_id - 1].bank : "" }}</p>
 
@@ -265,7 +265,7 @@ const hanledCantidadEdit = (accion) => {
                                     1].bank_code
                                     ?
                                     "Código" : "" }}</p>
-                                <p class="text-orange-500 text-2xl text-center">{{
+                                <p class="text-verde-500 text-2xl text-center">{{
                                     methodPayments[form.payment_method_id - 1].bank_code ?
                                     methodPayments[form.payment_method_id - 1].bank_code : "" }}</p>
 
@@ -273,7 +273,7 @@ const hanledCantidadEdit = (accion) => {
                                 <p class="text-slate-300 text-center">{{ methodPayments[form.payment_method_id - 1].card_id
                                     ?
                                     "Documento de identidad" : "" }}</p>
-                                <p class="text-orange-500 text-2xl text-center">{{
+                                <p class="text-verde-500 text-2xl text-center">{{
                                     methodPayments[form.payment_method_id - 1].card_id ?
                                     methodPayments[form.payment_method_id - 1].card_id : "" }}</p>
 
@@ -281,7 +281,7 @@ const hanledCantidadEdit = (accion) => {
                                 <p class="text-slate-300 text-center">{{ methodPayments[form.payment_method_id - 1].titular
                                     ?
                                     "Titular" : "" }}</p>
-                                <p class="text-orange-500 text-2xl text-center">{{
+                                <p class="text-verde-500 text-2xl text-center">{{
                                     methodPayments[form.payment_method_id - 1].titular ?
                                     methodPayments[form.payment_method_id - 1].titular : "" }}</p>
 

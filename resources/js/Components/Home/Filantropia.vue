@@ -10,8 +10,8 @@ const props = defineProps({
 <template>
     <section class="text-gray-400 bg-neutral-900 body-font">
         <div class="container px-5 py-24 mx-auto flex flex-wrap">
-            <div class="h-1 bg-orange-500 rounded overflow-hidden mb-4">
-                <div class="w-80 h-full bg-orange-500"></div>
+            <div class="h-1 bg-verde-500 rounded overflow-hidden mb-4">
+                <div class="w-80 h-full bg-verde-500"></div>
             </div>
             <div class=" w-full mb-5">
                 <h1 class="sm:text-4xl text-2xl font-bold title-font text-white lg:w-1/3 lg:mb-0 mb-2">{{ title }}</h1>

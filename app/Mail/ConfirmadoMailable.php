@@ -29,7 +29,7 @@ class ConfirmadoMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('venta@javiierdu.com', 'Ventas'), 
+            from: new Address(env('MAIL_FROM_ADDRESS'), 'Ventas'), 
             subject: 'Pago Confirmado',
         );
     }

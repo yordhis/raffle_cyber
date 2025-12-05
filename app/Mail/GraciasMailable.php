@@ -28,7 +28,8 @@ class GraciasMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('venta@javiierdu.com', 'Ventas'), 
+            // usar la constante
+            from: new Address(env('MAIL_FROM_ADDRESS'), 'Ventas'), 
             subject: '¡Gracias por su compra!',
         );
     }

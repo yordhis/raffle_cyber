@@ -115,27 +115,27 @@ const hanledDelete = (id, name) => {
             <div class=" w-80 p-4">
                 <SectionTitle><template #title>{{ sorteo.title }}</template></SectionTitle>
                 <p class="text-green-500 text-2xl font-semibold">Costo: {{ sorteo.cost }} $</p>
-                <p class="text-orange-500">Descripción:</p>
+                <p class="text-verde-500">Descripción:</p>
                 <p >{{ sorteo.description }}</p>
-                <p class="text-orange-500">
+                <p class="text-verde-500">
                     Fecha de Inicio: 
                     <span class="text-green-600">{{ sorteo.start_date }}</span>
                 </p>
-                <p class="text-orange-500">
+                <p class="text-verde-500">
                     Fecha de Finalización: 
                     <span class="text-red-600">{{ sorteo.end_date }}</span>
                 </p>
                
-                <p class="text-orange-500">
+                <p class="text-verde-500">
                     Limite de boletos: 
                     <span class="text-red-600">{{ sorteo.limit_number }}</span>
                 </p>
-                <p class="text-orange-500">
+                <p class="text-verde-500">
                     Mínimo de venta de boletos: 
                     <span class="text-red-600">{{ sorteo.minimum_purchese }}</span>
                 </p>
 
-                <p class="text-orange-500">
+                <p class="text-verde-500">
                     Estatus del sorteo: 
                     <span :class="sorteo.status ? 'bg-green-500 text-white p-1 rounded-2xl'
                                                 : 'bg-red-500 text-white p-1 rounded-2xl'
@@ -165,7 +165,7 @@ const hanledDelete = (id, name) => {
                     <button type="button" 
                         
                         @click="sorteo.status = hanledUpdateStatus(sorteo.id, sorteo)"
-                        :class="sorteo.status ? 'bg-orange-500 flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                        :class="sorteo.status ? 'bg-verde-500 flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
                                                     : 'bg-gray-200 flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
                                                     " 
                         role="switch" 

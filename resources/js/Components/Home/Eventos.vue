@@ -13,8 +13,8 @@ const props = defineProps({
                 <h1 class="sm:text-4xl text-3xl text-start font-bold title-font mb-4 text-white">{{ title }}</h1>
                 <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{ description }}</p>
             </div>
-            <div class="h-1 bg-orange-500 rounded overflow-hidden mb-4">
-                <div class="w-20 h-full bg-orange-500"></div>
+            <div class="h-1 bg-verde-500 rounded overflow-hidden mb-4">
+                <div class="w-20 h-full bg-verde-500"></div>
             </div>
 
             <div class="flex flex-wrap -m-4">

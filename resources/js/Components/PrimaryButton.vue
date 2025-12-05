@@ -1,6 +1,6 @@
 <template>
     <button
-        class="text-center ease-in duration-300 bg-green-500 hover:bg-orange-700 shadow-lg  shadow-green-500/50 rounded-lg p-2 my-2 text-white text-2xl"
+        class="text-center ease-in duration-300 bg-verde-500 hover:bg-verde-700 shadow-lg  shadow-verde-500/50 rounded-lg p-2 my-2 text-white text-2xl"
         >
         <slot />
     </button>

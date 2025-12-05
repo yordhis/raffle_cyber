@@ -196,7 +196,7 @@ if(urlParams.has('message')){
                 </div>
                 <div>
                    
-                    <!-- <button @click="openModal(1)" class="flex flex-wrap text-orange-600">
+                    <!-- <button @click="openModal(1)" class="flex flex-wrap text-verde-600">
                         <PlusCircleIcon style="width: 55px;"></PlusCircleIcon>
                         Registrar Cliente
                     </button> -->
@@ -218,7 +218,7 @@ if(urlParams.has('message')){
 
     <div class="overflow-x-auto p-5">
     <table class="min-w-full  shadow-sm border-gray-200 ">
-            <thead class="px-3 py-2 font-semibold text-left bg-orange-500 border-b">
+            <thead class="px-3 py-2 font-semibold text-left bg-verde-500 border-b">
                 <tr>
                     <th class="border border-gray-400 px-2 py-2">N° orden</th>
                     <th class="border border-gray-400 px-2 py-2">Participantes</th>
@@ -275,7 +275,7 @@ if(urlParams.has('message')){
     
         <Modal :show="modal" @close="closeModal" class="">
             <div class="flex flex-wrap justify-center">
-                <h2 class="w-full bg-orange-500 text-3xl font.medium text-white  p-2">{{ title }}</h2>
+                <h2 class="w-full bg-verde-500 text-3xl font.medium text-white  p-2">{{ title }}</h2>
                 <p class="p-4 bg-gray-200">Al confirmar o rechazar el pago se enviará un correo al cliente de su estatus de pago y si el pago es confirmao le llegará los números de boletos.</p>
                 
                 <div class="w-70 border-4 border-bottom text-center">
@@ -286,7 +286,7 @@ if(urlParams.has('message')){
 
                 <div class="w-full">
                     <div class="divide-y divide-blue-200">
-                        <div class="p-2 mx-4 bg-orange-500" v-if="parseInt(form.payment_status) == 1 ">Boletos asignados: {{ form.boletos }}</div>
+                        <div class="p-2 mx-4 bg-verde-500" v-if="parseInt(form.payment_status) == 1 ">Boletos asignados: {{ form.boletos }}</div>
                         <div class="p-2 mx-4">N° de orden: {{ form.order_code }}</div>
                         <div class="p-2 mx-4">Sorteo: {{ form.title }}</div>
                         <div class="p-2 mx-4">Cliente: {{ form.name }} - C.I.: {{ form.card_id }}</div>

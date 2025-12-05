@@ -130,7 +130,7 @@ const hanledDelete = (id, name) => {
                 </div>
                 <div>
                    
-                    <button @click="openModal(1)" class="flex flex-wrap text-orange-600">
+                    <button @click="openModal(1)" class="flex flex-wrap text-verde-600">
                         <PlusCircleIcon style="width: 55px;"></PlusCircleIcon>
                         Registrar Cliente
                     </button>
@@ -187,7 +187,7 @@ const hanledDelete = (id, name) => {
         <Modal :show="modal" @close="closeModal" class="">
             <div class="flex flex-wrap justify-center">
 
-                <h2 class="w-full bg-orange-500 text-3xl font.medium text-gray-900 p-2">{{ title }}</h2>
+                <h2 class="w-full bg-verde-500 text-3xl font.medium text-gray-900 p-2">{{ title }}</h2>
                 <div class="mt-1 p-3" >
                     <InputLabel for="name" value="Nombre completo:"></InputLabel>
                     <TextInput id="name" ref="nameInput" 

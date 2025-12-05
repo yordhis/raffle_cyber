@@ -28,43 +28,13 @@ const getComprar = (idRaffle) =>{
     form.get(route('compras.comprar', form.idRaffle));
 };
 
-// const options = {
-//   method: 'GET',
-//   url: 'https://api.instagapi.com/userposts/8153156059/12',
-//   headers: {
-//     'Content-Type': 'aplication/json',
-//     'X-InstagAPI-Key': 'dca0ce484dfa824e624e4854c7a091ac'
-// }
-// };
-
-// try {
-// 	const response = await axios.request(options);
-// 	console.log(response.data);
-// } catch (error) {
-// 	console.error(error);
-// }
-
-
-    // const getFilantropia = async () => {
-    //     // await axios.request('https://api.instagapi.com/userposts/8153156059/12',{
-    //     await axios.request('https://api.instagapi.com/userposts/8153156059/12',{
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'aplication/json',
-    //             'X-InstagAPI-Key': 'dca0ce484dfa824e624e4854c7a091ac',
-    //         }
-    //     }).then(res => console.log(res))
-
-    // }
-
-    // getFilantropia()
-
-
 </script>
 
 <template>
     <ClientLayout title="Home" >
+        
         <template #header >
+
             <template v-if="raffles[0]">
                 <!-- Slider de las imagenes -->
                 <Slider :images="[raffles[0].file]"></Slider>
@@ -88,6 +58,7 @@ const getComprar = (idRaffle) =>{
                     :total_sold="raffles[0].total_sold"
                     />
             </template>
+
             <template v-else>
                 <div class="flex flex-col justify-center ">
                     <div class="flex justify-center mt-20">
@@ -101,24 +72,8 @@ const getComprar = (idRaffle) =>{
           
         </template>
 
-
-        <!-- filantropia -->
-        <Filantropia id="filantropia="></Filantropia>
-        <!-- eventos -->
-        <Eventos id="eventos="></Eventos>
         <!-- Aliados -->
         <Aliados id="aliados="></Aliados>
-        <!-- Pie de página -->
-        <Footer 
-            title="Contáctenos"
-            sub-title="Por medio de nuestras redes sociales"
-        ></Footer>
-
-
-        
-
-
-
 
 </ClientLayout></template>
 

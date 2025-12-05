@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --verde-50: #f2fbf6;
+    --verde-100: #dcf7ea;
+    --verde-200: #bff0cf;
+    --verde-300: #86e4a1;
+    --verde-400: #4fd67a;
+    --verde-500: #18b65b;
+    --verde-600: #0e8f44;
+    --verde-700: #055130;
+    --verde-800: #084f28;
+    --verde-900: #06361a;
+    --primary: #055130;
+}
+
 
 .inputBox
 {
@@ -17,7 +31,7 @@
 {
     width: 100%;
     padding: 10px;
-    border: 1px solid rgba(252, 236, 223, 0.664);
+    border: 1px solid rgba(5, 78, 31, 0.664);
     background: #070a0e;
     border-radius: 5px;
     outline: none;
@@ -43,19 +57,19 @@
 .inputBox select:valid ~ span,
 .inputBox input:focus ~ span
 {
-    color: #f38302;
+    color: #055130;
     padding: 2.5px;
     transform: translateX(10px) translateY(-7px);
     font-size: 0.65em;
     padding: 0 10px;
     background: #070a0e;
-    border-left: 1px solid #f38830;
-    border-right: 1px solid #f38830;
+    border-left: 1px solid #055130;
+    border-right: 1px solid #055130;
     letter-spacing: 0.2em;
 }
 
 .inputBox input:valid,
 .inputBox input:focus 
 {
-    border: 2px solid #f38830;
+    border: 2px solid #055130;
 }

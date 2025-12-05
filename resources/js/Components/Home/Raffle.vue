@@ -48,9 +48,9 @@ let colorText = "text-white"
             <div class="grid grid-cols-1 grid-rows-1 gap-4 sm:gap-6 lg:gap-8 ">
                 
                 <div class="bg-gray-100 rounded-full ">
-                    <img :src="props.raffle.image"
+                        <img :src="props.raffle.image"
                         alt="imagen del premio"
-                        class="rounded-lg shadow-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 duration-300" >
+                        class="rounded-lg shadow-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-verde-500 duration-300" >
 
                 </div>
                     
@@ -59,7 +59,7 @@ let colorText = "text-white"
 
             <div class="grid grid-cols-1 grid-rows-1 gap-4 sm:gap-6 lg:gap-8 ">
                 
-                <div class="static bg-stone-900 text-center p-10 m-3 rounded-2xl shadow-2xl shadow-orange-500/50 ">
+                <div class="static bg-stone-900 text-center p-10 m-3 rounded-2xl shadow-2xl shadow-verde-500/50 ">
 
                         <img src="/assets/images/ticket.png" width="150"
                             alt="imagen del premio"
@@ -73,12 +73,12 @@ let colorText = "text-white"
 
 
                         <div class="w-100 border rounded-2xl p-1 my-4">
-                            <div class="bg-orange-500 rounded-2xl " style="width: 100%;">100%</div>
+                            <div class="bg-verde-500 rounded-2xl " style="width: 100%;">100%</div>
                         </div>
                         
                         <button class="text-center ease-in duration-300">
                             <Link :href="route('compras.index')" 
-                                    class="bg-green-500 hover:bg-orange-700 shadow-lg  shadow-green-500/50 rounded-lg p-2  text-white text-2xl text-center ">
+                                    class="bg-verde-500 hover:bg-verde-700 shadow-lg  shadow-verde-500/50 rounded-lg p-2  text-white text-2xl text-center ">
                                     ¡PARTICIPA AHORA!
                             </Link>
                         </button>

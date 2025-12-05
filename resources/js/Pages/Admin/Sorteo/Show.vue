@@ -39,7 +39,7 @@ const form =  useForm({
                 </div>
                 <div>
                     <NavLink :href="route('sorteos.create')"
-                    class="text-orange-600">
+                    class="text-verde-600">
                         <PlusCircleIcon></PlusCircleIcon>
                         Crear Sorteo
                     </NavLink>

@@ -111,7 +111,7 @@ const form = useForm({
                                         file:rounded-full file:border-0
                                         file:text-sm file:font-semibold
                                         file:bg-green-50 file:text-black-700
-                                        hover:file:bg-orange-100" accept="image/*" type="file"
+                                        hover:file:bg-verde-100" accept="image/*" type="file"
                         @input="form.file = $event.target.files[0]">
                     <div class="p-0 m-0 text-red-500" v-if="form.errors.file">{{ form.errors.file }}</div>
 
@@ -124,7 +124,7 @@ const form = useForm({
                     <!-- submit -->
 
                     <button
-                        class="w-full text-center ease-in duration-300 bg-green-500 hover:bg-orange-700 shadow-lg  shadow-green-500/50 rounded-lg p-2 my-2 text-white text-2xl text-center">
+                        class="w-full text-center ease-in duration-300 bg-verde-500 hover:bg-verde-700 shadow-lg  shadow-verde-500/50 rounded-lg p-2 my-2 text-white text-2xl text-center">
                         Crear Sorteo
                     </button>
 
